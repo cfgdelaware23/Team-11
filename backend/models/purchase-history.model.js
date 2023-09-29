@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const purchaseHistorySchema = mongoose.Schema({
     username: {
@@ -12,6 +12,6 @@ const purchaseHistorySchema = mongoose.Schema({
     }
 });
 
-const PurchaseHistory = mongoose.model(purchaseHistorySchema)
+const PurchaseHistory = mongoose.model("PurchaseHistory", purchaseHistorySchema)
 
 export default PurchaseHistory
