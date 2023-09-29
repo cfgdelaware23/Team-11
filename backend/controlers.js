@@ -2,8 +2,6 @@ import UserData from "../models/user-data.model.js";
 
 import express from "express"
 
-const router = express.Router()
-
 export const createCustomer = (req) => {
     const name = req.body.name;
     const discount = req.body.discount;
