@@ -1,5 +1,5 @@
 import PurchaseHistory from "../models/purchase-history.model.js";
-import { createCustomer, getCustomer } from "../controllers.js";
+import { createCustomer, getCustomer, deleteCustomer } from "../controllers.js";
 
 import express from "express";
 const router = express.Router();
@@ -30,13 +30,11 @@ router.get("/user/:username", async (req, res)=>{
     return getCustomer(req.params.username, res);
 })
 
+router.delete("/user/:username", async (req, res) => {
+    return deleteCustomer(req.params.username, res);
+})
+
 export const updateCustomer = async () => {
-
 }
-
-export const deleteCustomer = async () => {
-
-}
-
 
 export default router;
