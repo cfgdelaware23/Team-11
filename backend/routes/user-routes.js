@@ -1,3 +1,4 @@
+import { createCustomer } from "../controlers.js";
 import UserData from "../models/user-data.model.js";
 
 import express from "express"
@@ -12,18 +13,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-    const name = req.body.name;
-    const discount = req.body.discount;
-    const username = req.body.username;
-    const lastUpdate = req.body.lastUpdate;
-    const lastUpdatedByUser = req.body.lastUpdatedByUser;
-
-    const newUser = new UserData({name, discount, username, lastUpdate, lastUpdatedByUser});
-    newUser.save().then(() => {
-        res.json('User added!')
-    }).catch((err) => {
-        res.status(400).json('Error: ' + err)
-    })
+    createCustomer(req.body.user);
 })
 
 export default router;
