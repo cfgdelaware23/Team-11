@@ -5,6 +5,10 @@ import mongoose from "mongoose";
 
 dotenv.config();
 
+// mongoose.connect(DB_URI).then(() => {
+//     console.log(`Connected to ${process.env.DB_NAME}`);
+// }).catch(console.log);
+
 const app = express();
 app.use(cors());
 app.use(json({
