@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const userDataSchema = new mongoose.Schema({
     name: {
@@ -16,6 +16,10 @@ const userDataSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    currentStars: {
+        type: String,
+        required: true
+    },
     lastUpdate: {
         type: Date,
         required: true
@@ -26,7 +30,7 @@ const userDataSchema = new mongoose.Schema({
     }
 });
 
-const UserData = mongoose.model('UserData', userDaataSchema);
+const UserData = mongoose.model('UserData', userDataSchema);
 
-module.exports = UserData;
+export default UserData;
 
