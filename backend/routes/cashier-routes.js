@@ -1,17 +1,15 @@
-import { createCustomer } from "../controlers.js";
-import UserData from "../models/user-data.model.js";
+import { createCustomer, getCustomer } from "../controllers.js";
 
 import express from "express";
 const router = express.Router();
 
 router.post("/create", async (req, res) => {
-    createCustomer(req.body.user);
+    return createCustomer(req.body.user, res);
 })
 
-
-export const readCustomer = async () => {
-
-}
+router.get("/user/:username", async (req, res)=>{
+    return getCustomer(req.params.username, res);
+})
 
 export const updateCustomer = async () => {
 
@@ -21,6 +19,5 @@ export const deleteCustomer = async () => {
 
 }
 
-router.route()
 
 export default router;
