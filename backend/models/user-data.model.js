@@ -16,6 +16,10 @@ const userDataSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    currentStars: {
+        type: String,
+        required: true
+    },
     lastUpdate: {
         type: Date,
         required: true
