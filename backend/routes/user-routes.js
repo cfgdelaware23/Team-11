@@ -1,4 +1,4 @@
-import { createCustomer } from "../controlers.js";
+import { createCustomer } from "../controllers.js";
 import UserData from "../models/user-data.model.js";
 
 import express from "express"
