@@ -22,4 +22,4 @@ const incomeCategorySchema = mongoose.Schema({
 
 const IncomeCategory = mongoose.model("IncomeCategory", incomeCategorySchema);
 
-module.exports = IncomeCategory;
+export default IncomeCategory;
