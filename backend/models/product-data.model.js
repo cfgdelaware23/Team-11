@@ -9,6 +9,10 @@ const productDataSchema = mongoose.Schema({
     stars: {
         type: Number,
         required: true
+    },
+    basePrice: {
+        type: Number,
+        required: true
     }
 });
 
