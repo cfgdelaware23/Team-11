@@ -11,9 +11,10 @@ const userDataSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    id: {
-        type: Number,
-        required: true
+    username: {
+        type: String,
+        required: true,
+        unique: true
     },
     lastUpdate: {
         type: Date,
