@@ -7,13 +7,14 @@ import {
 } from "react-router-dom";
 
 import Landing from "./routes/Landing";
+import Register from "./routes/register";
 
 import './index.css'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
+    element: <Register />,
   },
 ]);
 
