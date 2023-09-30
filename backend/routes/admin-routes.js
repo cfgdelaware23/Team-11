@@ -72,10 +72,10 @@ router.post("/product/delete", async (req, res) => {
         return
     }
 
-    const deleted = await ProductData.deleteOne(id);
+    const deleted = await ProductData.deleteOne({productID: id});
 
     if (!deleted) {
-        res.status(400).json('Can not find specified product')
+        res.status(400).json('Cannot find specified product')
         return;
     }
 
