@@ -33,6 +33,7 @@ router.delete("/:username", async (req, res) => {
     return deleteCustomer(req.params.username, res);
 })
 
+//tested and works
 router.put("/update", async (req, res) => {
     return updateCustomer(req.body.user, res);
 })

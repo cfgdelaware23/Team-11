@@ -75,33 +75,29 @@ export const deleteCustomer = async (username, res) => {
 
 export const updateCustomer = async (newUserData, res) => {
     const username = newUserData.username;
-    const user = UserData.findOne({ username: username }).then((foundUsr) => {
-        if (!foundUsr) {
-            res.status(400).json("Cannot find user " + username)
+
+    try {
+        const user = await UserData.findOne({ username: username });
+
+        if (!user) {
+            return res.status(400).json("Cannot find user " + username);
         }
-    }).catch((err) => {
-        res.status(400).json('Error when searching customer: ' + err)
-    })
 
-    const name = newUserData.name
-    const discount = newUserData.discount
-    const currentStars = newUserData.currentStars
-    const lastUpdate = new Date()
-    const lastUpdatedByUser = newUserData.lastUpdatedByUser
+        user.name = newUserData.name;
+        user.discount = newUserData.discount;
+        user.currentStars = newUserData.currentStars;
+        user.lastUpdate = new Date();
+        user.lastUpdatedByUser = newUserData.lastUpdatedByUser;
 
-    if (!name || !discount || currentStars || !username || !lastUpdatedByUser) {
-        return res.status(400).json('User creation request lacks field')
+        await user.save();
+
+        return res.json("User updated");
+    } catch (err) {
+        console.error("Error when updating customer:", err);
+        return res.status(400).json('Error updating customers');
     }
-
-    user.name = name;
-    user.discount = discount;
-    user.currentStars = currentStars;
-    user.lastUpdate = lastUpdate;
-    user.lastUpdatedByUser = lastUpdatedByUser;
-
-    let resp = await user.save().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
-    return resp
 }
+
 
 //Can change this function depending on how the discount will be calculated given the qualifiers of the customer
 export const calculateDiscount = async (qualifiers) => {
