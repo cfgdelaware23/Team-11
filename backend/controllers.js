@@ -4,18 +4,19 @@ import IncomeCategory from "./models/income-category.model.js";
 import FeedbackCategory from "./models/feedback.model.js";
 
 export const createCustomer = async (user, res) => {
-    if (!user || !user.name || !user.discount || !user.username || !user.publicHousing) {
+    if (!user || !user.name || !user.username 
+        || user.qualifiers.publicHousing == null || user.qualifiers.EBT == null
+        || user.qualifiers.SNAP == null) {
         return res.status(400).json('request body should contain a user object with name, discount, username, and publicHousing')
     }
     const name = user.name;
     //const discount = user.discount;
     const username = user.username;
-    const housing = user.publicHousing;
     const currentStars = 0;
     const lastUpdate = new Date();
     const lastUpdatedByUser = false;
 
-    const discount = calculateDiscount(user.qualifiers);
+    const discount = await calculateDiscount(user.qualifiers);
 
     // commit the income category data for the new user to the database
     const publicHousing = user.qualifiers.publicHousing;
