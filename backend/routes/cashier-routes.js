@@ -1,5 +1,5 @@
 import PurchaseHistory from "../models/purchase-history.model.js";
-import { createCustomer, getCustomer, deleteCustomer, updateCustomer } from "../controllers.js";
+import { createCustomer, getCustomer, deleteCustomer, updateCustomer, updateIncomeCategory } from "../controllers.js";
 
 import express from "express";
 const router = express.Router();
@@ -35,6 +35,11 @@ router.delete("/:username", async (req, res) => {
 
 router.put("/update", async (req, res) => {
     return updateCustomer(req.body.user, res);
+})
+
+router.put("/editIncomeCategory", async (req, res) => {
+    await updateIncomeCategory(req, res);
+    return;
 })
 
 router.post("/addfeedback", async (req, res) => {

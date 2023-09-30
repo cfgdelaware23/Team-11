@@ -4,13 +4,18 @@ import express from "express"
 const router = express.Router()
 
 router.get('/:username', async (req, res) => {
-    let data = await getCustomer(req.params.username, res);   
-    return data
+    await getCustomer(req.params.username, res);   
+    return;
 })
 
 router.post('/signup', async (req, res) => {
-    let data = await createCustomer(req.body.user, res);
-    return data
+    await createCustomer(req.body.user, res);
+    return;
+})
+
+router.put("/editIncomeCategory", async (req, res) => {
+    await updateIncomeCategory(req, res);
+    return;
 })
 
 router.post("/addfeedback", async (req, res) => {
@@ -20,6 +25,7 @@ router.post("/addfeedback", async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "An error occurred while updating feedback" });
     }
+    return;
 })
 
 export default router;
