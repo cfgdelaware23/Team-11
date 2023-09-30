@@ -62,9 +62,7 @@ export const getCustomer = async (username, res) => {
 
 // tested
 export const deleteCustomer = async (username, res) => {
-    let userData = await UserData.deleteOne({username: username}).then(() => {
-       // res.json('User deleted.')
-    }
+    let userData = await UserData.deleteOne({username: username}).then(() => {}
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
@@ -72,11 +70,15 @@ export const deleteCustomer = async (username, res) => {
     await IncomeCategory.deleteOne({username: username}).then((_) => {})
     .catch((err) => res.status(400).json('Error: ' + err)); 
 
-    await PurchaseHistory.deleteOne({username: username}).then(() => {
-        res.status(200).json('User deleted.')
+    await PurchaseHistory.deleteOne({username: username}).then(() => {})
+      .catch((err) => {
+        res.status(400).json('Error: ' + err)
+    })
+    await IncomeCategory.deleteOne({username: username}).then(() => {
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
+    res.json("User, associated purchase history, and income category deleted")
     return userData;
 } 
 
