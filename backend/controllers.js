@@ -1,4 +1,5 @@
 import UserData from "./models/user-data.model.js";
+import PurchaseHistory from "./models/purchase-history.model.js";
 
 export const createCustomer = async (user, res) => {
     const name = user.name;
@@ -6,23 +7,25 @@ export const createCustomer = async (user, res) => {
     const username = user.username;
     const currentStars = 0;
     const lastUpdate = new Date();
-    const lastUpdatedByUser = user.lastUpdatedByUser;
+    const lastUpdatedByUser = false;
 
-    if (!name || !discount || !username || !lastUpdatedByUser) {
+    if (!name || !discount || !username) {
         return res.status(400).json('User creation request lacks field')
     }
-    const newUser = new UserData({name, discount, username, lastUpdate, lastUpdatedByUser});
-    
+    const newUser = new UserData({name, discount, username, currentStars, lastUpdate, lastUpdatedByUser});
+    const newPurchaseHistory = new PurchaseHistory({username, history: []});
+    await newPurchaseHistory.save();
     let data = await newUser.save().then(() => {
-        res.json('User added!')
+        res.json('User added: ' + username)
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
+    
     return data;
 }
 
 export const getCustomer = async (username, res) => {
-    let userData = await UserData.find({username: username}).then((user) => {
+    let userData = await UserData.findOne({username: username}).then((user) => {
         res.json(user);
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
