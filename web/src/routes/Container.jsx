@@ -3,6 +3,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Shop from './Shop';
 import Home from './Home';
 import Feedback from './Feedback';
+import PreviousPurchases from './PreviousPurchases'
 import importImg from './logo.png';
 
 export default function Container() {
@@ -25,6 +26,11 @@ export default function Container() {
             <Tab eventKey="FeedBack" title="FeedBack">
                   
                 <Feedback />
+            </Tab>
+
+            <Tab eventKey="PreviousPurchases" title="Previous Purchases">
+                  
+                <PreviousPurchases />
             </Tab>
 
         </Tabs>

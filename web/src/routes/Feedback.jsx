@@ -34,6 +34,7 @@ export default function Feedback(){
     return(
         
     <div className="Eligibility">
+        <h1 className="header">Give us your feedback! </h1>
         {/* <img className="logo" src={logoImage} alt='import'></img><br/> */}
         <h1 className="questionsContainer">How nutrious would you rank our food?</h1>
         <button className="ratingContainer" onClick={() => handleNutritionRatingClick(1)}>1</button>
