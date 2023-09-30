@@ -7,9 +7,16 @@ import importImg from './logo.png';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import React, { useState, useEffect } from 'react';
+import apple from "./apple.jpg";
+import bread from "./bread.jpg"
+import spinach from "./spinach.png"
+import water from "./water.png"
+import soda from "./soda.jpg"
+import strawberries from "./strawberries.jpg"
+import orange from "./orange.jpg"
+import pretzels from "./pretzels.png"
 
 export default function Shop() {
-    
 
     const groceryProducts = [
         {
@@ -21,6 +28,8 @@ export default function Shop() {
             inStock: true,
             discount: false,
             id: 0,
+            image: apple,
+            
         },
         {
             name: "Whole Grain Bread",
@@ -31,6 +40,7 @@ export default function Shop() {
             inStock: true,
             discount: true,
             id: 1,
+            image: bread,
         },
         {
             name: "Fresh Spinach",
@@ -41,6 +51,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 2,
+            image: spinach,
         },
         {
             name: "Sparkling Water",
@@ -51,6 +62,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 3,
+            image: water,
         },
         {
             name: "Sugar Free Soda",
@@ -61,6 +73,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 4,
+            image: soda,
         },
         {
             name: "Strawberries",
@@ -71,6 +84,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 5,
+            image: strawberries
         },
         {
             name: "Pretzels",
@@ -81,6 +95,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 6,
+            image: pretzels
         },
         {
             name: "Orange Juice",
@@ -91,6 +106,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 7,
+            image: orange
         },
         
     ];
@@ -146,6 +162,7 @@ export default function Shop() {
                     {filteredProducts.map((product, index) => (
                         <Col xs={12} sm={7} md={4} lg={3} key={index}>
                             <Card style={{ width: '18rem' }}>
+                            <img src={product.image}/> {/* Add this img tag */}
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Text>
