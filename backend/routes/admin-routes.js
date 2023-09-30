@@ -26,7 +26,7 @@ router.post("/product/add", async (req, res) => {
 router.get("/product/:productID", async (req, res) => {
     const id = req.params.productID
 
-    const found = await ProductData.findOne(id);
+    const found = await ProductData.findOne({productID: id});
     if(!found) {
         res.status(400).json("Product id does not exist");
         return;
@@ -35,7 +35,7 @@ router.get("/product/:productID", async (req, res) => {
     return;
 })
 
-router.post("/product/update", async (req, res) => {
+router.put("/product/update", async (req, res) => {
     const product = req.body.product;
     const id = product.productId;
     const stars = product.stars;
@@ -46,14 +46,14 @@ router.post("/product/update", async (req, res) => {
         return
     }
 
-    const found = await ProductData.findOne(id);
+    const found = await ProductData.findOne({productID: id});
     if(!found) {
         res.status(400).json('Product id does not exist');
         return;
     }
 
-    found.stars = product.stars;
-    found.basePrice = product.basePrice;
+    found.stars = stars;
+    found.basePrice = basePrice;
 
     await found.save().then((updated) => {
         res.status(200).json(updated)
@@ -63,19 +63,19 @@ router.post("/product/update", async (req, res) => {
     return;
 })
 
-router.post("/product/delete", async (req, res) => {
+router.delete("/product/delete", async (req, res) => {
     const product = req.body.product;
-    const id = product.productId;
+    const productID = product.productID;
 
     if (!id) {
         res.status(400).json('Product delete request must have a product with productId');
         return
     }
 
-    const deleted = await ProductData.deleteOne(id);
+    const deleted = await ProductData.deleteOne({productID});
 
     if (!deleted) {
-        res.status(400).json('Can not find specified product')
+        res.status(400).json('Cannot find specified product')
         return;
     }
 
@@ -94,7 +94,7 @@ router.get("/userPurchaseHistory/:username", async (req, res) => {
     const username = req.params.username;
     const user = await PurchaseHistory.findOne({username: username});
     if(!user) {
-        res.status(400).json("User not found");
+        res.status(400).json("Purchase history with user not found");
         return;
     }
     res.status(200).json(user);
@@ -109,7 +109,15 @@ router.get("/allCustomers", async (req, res) => {
     .catch((err) => {
         res.status(400).json("Error: " + err);
     });
-    
+    return;
+})
+
+router.get("/allProducts", async (req, res) => {
+    await ProductData.find()
+    .then((datas) => res.status(200).json(datas))
+    .catch((err) => {
+        res.status(400).json("Error while fetching all data: " + err);
+    })
     return;
 })
 
