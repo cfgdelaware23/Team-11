@@ -14,7 +14,7 @@ This screen starts the main page for the user get informaton from and interact w
 # 3. Eligibility Screen
 This screen serves the purpose of verifying if the user is eligible for a discount. Based on their answers to the following questions, they may recieve a discount: "Are you part of SNAP??", "Are you part of EBT", and "Do you live in public hoursing?". If an individual answers yes to either of these questions, they are eligible for a discount.
 
-#4. User Information Screen
+# 4. User Information Screen
 After registering and completing the eligibility screen or after signing in, the user's information is displayed, including thier name, username, id, discount, and number of stars.  Users recieve a certain number of stars based on the health value of the food you purchase. After users recieve a certain number of stars, they are rewarded.
 
 # 7. Shop Screen
