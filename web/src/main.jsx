@@ -8,6 +8,7 @@ import {
 
 import Landing from "./routes/Landing";
 import Register from "./routes/register";
+// import Eligibility from "./routes/Eligibility";
 
 import './index.css'
 
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Register />,
+  },
+  {
+    path: "/eligibility",
+    element: <Landing />,
   },
 ]);
 
