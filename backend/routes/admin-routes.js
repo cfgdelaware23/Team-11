@@ -112,4 +112,13 @@ router.get("/allCustomers", async (req, res) => {
     return;
 })
 
+router.get("/allProducts", async (req, res) => {
+    await ProductData.find()
+    .then((datas) => res.status(200).json(datas))
+    .catch((err) => {
+        res.status(400).json("Error while fetching all data: " + err);
+    })
+    return;
+})
+
 export default router;
