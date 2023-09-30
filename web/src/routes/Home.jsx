@@ -6,7 +6,15 @@ import { useLocation } from 'react-router-dom';
 
 export default function Home() {
     const location = useLocation();
-  const { username, password, userData } = location.state;
+  const { username, password } = location.state;
+  const [userData, setUserData] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:3000/user/${username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+      });
+  })
 
     return (
     <div>

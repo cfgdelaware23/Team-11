@@ -17,7 +17,6 @@ import SignIn from './routes/SignIn';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Container />,
     element: <Landing />,
   },
   {
