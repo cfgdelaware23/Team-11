@@ -8,14 +8,16 @@ import {
 
 import Landing from "./routes/Landing";
 import Register from "./routes/register";
-// import Eligibility from "./routes/Eligibility";
+import Eligibility from "./routes/Eligibility";
 
+import Home from "./routes/Home";
 import './index.css'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Register />,
+    element: <Landing />,
   },
   {
     path: "/eligibility",

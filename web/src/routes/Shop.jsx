@@ -5,6 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 export default function Shop() {
+    function randomNumber() {
+        var num = Math.floor(Math.random() * groceryProducts.length -1);
+        return num;
+    }
     const groceryProducts = [
         {
             name: "Organic Apples",
@@ -36,6 +40,8 @@ export default function Shop() {
     ];
 
     return (
+       <div> 
+        <h1>Product of the Day!</h1>
         <Container className='justify-center'>
             <Row>
                 {groceryProducts.map((product, index) => (
@@ -55,5 +61,6 @@ export default function Shop() {
                 ))}
             </Row>
         </Container>
+        </div>
     );
 }
