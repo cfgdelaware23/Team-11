@@ -199,7 +199,8 @@ export default function Shop() {
                                         {product.description}
                                     </Card.Text>
                                     <Card.Text>
-                                    ${product.discount = 0.5 ?  (product.price * 0.5).toFixed(2) : product.price}
+                                        {console.log(product.discount)}
+                                    ${userData.discount === 0.50 ?  (product.price * 0.5).toFixed(2) : product.price}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

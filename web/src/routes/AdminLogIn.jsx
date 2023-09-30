@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function signIn() {
+export default function adminLogin() {
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
@@ -10,7 +10,7 @@ export default function signIn() {
 
  
   // Navigate to the '/home' route with the data as state
-  navigate('/home', {
+  navigate('/adminTable', {
     state: {
       username: username,
       password: password,
@@ -70,3 +70,5 @@ export default function signIn() {
     </div>
   );
 }
+
+  
