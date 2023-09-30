@@ -61,4 +61,13 @@ export const updateCustomer = async (username, newUserData, res) => {
     if (!name || !discount || currentStars || !username || !lastUpdatedByUser) {
         return res.status(400).json('User creation request lacks field')
     }
+
+    user.name = name;
+    user.discount = discount;
+    user.currentStars = currentStars;
+    user.lastUpdate = lastUpdate;
+    user.lastUpdatedByUser = lastUpdatedByUser;
+
+    let resp = await user.savee().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
+    return resp
 }
