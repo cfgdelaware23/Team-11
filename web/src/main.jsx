@@ -7,14 +7,22 @@ import {
 } from "react-router-dom";
 
 import Landing from "./routes/Landing";
+import Register from "./routes/register";
+import Eligibility from "./routes/Eligibility";
 
+import Home from "./routes/Home";
 import './index.css'
 import Eligibility from './routes/Eligibility';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Eligibility />,
+  },
+  {
+    path: "/eligibility",
+    element: <Landing />,
   },
 ]);
 
