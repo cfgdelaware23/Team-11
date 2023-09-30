@@ -26,7 +26,7 @@ router.post("/product/add", async (req, res) => {
 router.get("/product/:productID", async (req, res) => {
     const id = req.params.productID
 
-    const found = await ProductData.findOne(id);
+    const found = await ProductData.findOne({productID: id});
     if(!found) {
         res.status(400).json("Product id does not exist");
         return;
@@ -46,14 +46,14 @@ router.post("/product/update", async (req, res) => {
         return
     }
 
-    const found = await ProductData.findOne(id);
+    const found = await ProductData.findOne({productID: id});
     if(!found) {
         res.status(400).json('Product id does not exist');
         return;
     }
 
-    found.stars = product.stars;
-    found.basePrice = product.basePrice;
+    found.stars = stars;
+    found.basePrice = basePrice;
 
     await found.save().then((updated) => {
         res.status(200).json(updated)
