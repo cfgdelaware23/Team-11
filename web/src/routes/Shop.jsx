@@ -61,5 +61,6 @@ export default function Shop() {
                 ))}
             </Row>
         </Container>
+        </div>
     );
 }
