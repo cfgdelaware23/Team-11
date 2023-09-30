@@ -9,11 +9,12 @@ import {
 import Landing from "./routes/Landing";
 
 import './index.css'
+import Eligibility from './routes/Eligibility';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
+    element: <Eligibility />,
   },
 ]);
 
