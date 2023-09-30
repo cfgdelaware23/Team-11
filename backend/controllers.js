@@ -15,7 +15,7 @@ export const createCustomer = async (user, res) => {
     const username = user.username;
     const currentStars = 0;
     const lastUpdate = new Date();
-    const lastUpdatedByUser = false;
+    const lastUpdatedByUser = user.lastUpdatedByUser;
 
     const existing = await UserData.findOne({username: username});
     if (existing) {
@@ -91,10 +91,23 @@ export const updateCustomer = async (newUserData, res) => {
         }
 
         user.name = newUserData.name;
-        user.discount = newUserData.discount;
-        user.currentStars = newUserData.currentStars;
+        //user.discount = newUserData.discount;
+        //user.currentStars = newUserData.currentStars;
         user.lastUpdate = new Date();
         user.lastUpdatedByUser = newUserData.lastUpdatedByUser;
+
+        const discount = await calculateDiscount(newUserData.qualifiers);
+        user.discount = discount;
+
+        // commit the new income category data to the database
+        const existingUserCategory = await IncomeCategory.findOne({username:username});
+        if (!existingUserCategory) {
+            res.status(400).json("Cannot find user category despite user existing, this should not happen");
+        }
+        existingUserCategory.publicHousing = newUserData.qualifiers.publicHousing;
+        existingUserCategory.EBT = newUserData.qualifiers.EBT;
+        existingUserCategory.SNAP = newUserData.qualifiers.SNAP;
+        await existingUserCategory.save();
 
         await user.save();
 

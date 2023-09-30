@@ -11,6 +11,7 @@ router.get('/:username', async (req, res) => {
 
 // tested and works on both nonexisting and existing users
 router.post('/signup', async (req, res) => {
+    req.body.user.lastUpdatedByUser = true;
     await createCustomer(req.body.user, res);
     return;
 })
