@@ -21,6 +21,23 @@ router.put("/editIncomeCategory", async (req, res) => {
     return;
 })
 
+router.post("/getdiscount", async (req, res) => {
+    const username = req.body.username;
+    try {
+        const user = await UserData.findOne({username: username});
+        
+        if (!user) {
+            return res.status(400).json("Cannot find user " + username);
+        }
+        res.status(200).json("successfully returned discount");
+        return user.discount;
+    } catch (err) {
+        console.error("Error getting discount:", err);
+        return res.status(400).json('Error getting discount');
+    }
+    
+})
+
 router.post("/addfeedback", async (req, res) => {
     try {
         await updateFeedback(req.body.username, req.body.feedback);
