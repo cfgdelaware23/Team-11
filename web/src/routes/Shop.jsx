@@ -5,22 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "./landing.css"
 import importImg from './logo.png';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
+import React, { useState, useEffect } from 'react';
 
 export default function Shop() {
-    function displayProductofTheDay() {
-        var num = Math.floor(Math.random() * groceryProducts.length);
-        console.log(num);
-        let answer = "";
-        const productToFind = groceryProducts.find(product => product.id === num);
-        if (productToFind) {
-            const { name, description, price } = productToFind;
-            answer += `${name}.`;
-            answer += ` ${description} `;
-            answer += `$${price}.`;
-         }
-        return answer;
-    }
-
+    
 
     const groceryProducts = [
         {
@@ -106,31 +97,71 @@ export default function Shop() {
         
     ];
 
+    const [searchQuery, setSearchQuery] = useState("");
+    function handleSearchChange(event) {
+        setSearchQuery(event.target.value);
+    }
+    
+    const [productOfTheDay, setProductOfTheDay] = useState(null);
+
+    useEffect(() => {
+        setProductOfTheDay(selectRandomProduct());
+      }, []);
+
+  
+      const filteredProducts = groceryProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    
+
+    function selectRandomProduct() {
+        var num = Math.floor(Math.random() * groceryProducts.length);
+        console.log(num);
+        let answer = "";
+        const productToFind = groceryProducts.find(product => product.id === num);
+        if (productToFind) {
+            const { name, description, price } = productToFind;
+            answer += `${name}.`;
+            answer += ` ${description} `;
+            answer += `$${price}.`;
+         }
+        return answer;
+    }
+
+
+
     return (
-       <div> 
-        <h1 className="header">Product of the Day: {displayProductofTheDay()}</h1>
-        <img className="logo3" src={importImg} alt='import'></img><br/>
-        
-        
-        <Container className='justify-center'>
-            <Row>
-                {groceryProducts.map((product, index) => (
-                    <Col xs={12} sm={7} md={4} lg={3} key={index}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{product.name}</Card.Title>
-                                <Card.Text>
-                                    {product.description}
-                                </Card.Text>
-                                <Card.Text>
-                                    ${product.price}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
-        </Container>
+        <div>
+           <h1 className="header">
+        Product of the Day: {productOfTheDay}
+      </h1>
+            <img className="logo3" src={importImg} alt='import' /><br />
+            <InputGroup className="mb-3">
+                <FormControl
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+            </InputGroup>
+            <Container className='justify-center'>
+                <Row>
+                    {filteredProducts.map((product, index) => (
+                        <Col xs={12} sm={7} md={4} lg={3} key={index}>
+                            <Card style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>{product.name}</Card.Title>
+                                    <Card.Text>
+                                        {product.description}
+                                    </Card.Text>
+                                    <Card.Text>
+                                        ${product.price}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </div>
     );
 }
