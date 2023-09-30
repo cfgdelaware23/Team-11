@@ -94,7 +94,7 @@ router.get("/userPurchaseHistory/:username", async (req, res) => {
     const username = req.params.username;
     const user = await PurchaseHistory.findOne({username: username});
     if(!user) {
-        res.status(400).json("User not found");
+        res.status(400).json("Purchase history with user not found");
         return;
     }
     res.status(200).json(user);
@@ -109,7 +109,6 @@ router.get("/allCustomers", async (req, res) => {
     .catch((err) => {
         res.status(400).json("Error: " + err);
     });
-    
     return;
 })
 
