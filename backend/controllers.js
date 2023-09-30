@@ -16,6 +16,11 @@ export const createCustomer = async (user, res) => {
     const lastUpdate = new Date();
     const lastUpdatedByUser = false;
 
+    const existing = await UserData.findOne({username: username});
+    if (existing) {
+        return res.status(400).json('User already exists');
+    }
+
     const discount = await calculateDiscount(user.qualifiers);
 
     // commit the income category data for the new user to the database
@@ -42,6 +47,10 @@ export const createCustomer = async (user, res) => {
 
 export const getCustomer = async (username, res) => {
     let userData = await UserData.findOne({username: username}).then((user) => {
+        if (!user){
+            res.status(400).json('No such user');
+            return;
+        }
         res.json(user);
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
@@ -96,7 +105,7 @@ export const updateCustomer = async (newUserData, res) => {
 
 //Can change this function depending on how the discount will be calculated given the qualifiers of the customer
 export const calculateDiscount = async (qualifiers) => {
-    if(qualifiers.publicHousing || qualifiers.ebt || qualifiers.snap) {
+    if(qualifiers.publicHousing || qualifiers.EBT || qualifiers.SNAP) {
         return 0.5;
     }
     return 0;
@@ -127,17 +136,27 @@ export const updateIncomeCategory = async (req, res) => {
     const EBT = req.body.EBT
     const SNAP = req.body.SNAP
 
+    const newDiscount = await calculateDiscount(req.body);
+
     if (username == null || publicHousing == null || EBT == null || SNAP == null) {
         res.status(400).json('Updating incomoe category requires all fields to be set');
         return;
     }
 
-    const user = await IncomeCategory.findOne({username:username})
+    const user = await IncomeCategory.findOne({username:username});
     
     if (!user) {
         res.status(400).json('User does not exist');
         return;
     }
+
+    const userProfile = await UserData.findOne({username:username});
+    if (!userProfile) {
+        res.status(400).json('User does not exist but income category exists, should not happen');
+        return;
+    }
+    userProfile.discount = newDiscount;
+    await userProfile.save().then((_) => {}).catch((err) => res.status(400).json("Error changing profile discount rate: " + err));
 
     user.overwrite(req.body);
     await user.save().then((_) => {
