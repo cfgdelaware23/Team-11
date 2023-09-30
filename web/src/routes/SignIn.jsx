@@ -8,14 +8,26 @@ export default function signIn() {
     const password = document.getElementById("password").value;
     const username = document.getElementById("username").value;
 
- 
+
+    const response = await fetch(`http://localhost:3000/admin/allCustomers`).then((res) => res.json())
+    .then(data=>{
+      console.log(data)
+      if (data.map(obj =>obj.username).includes(username)){
+        navigate('/home', {
+            state: {
+              username: username,
+              password: password,
+            },
+          });
+      }else{
+        alert("Invalid username or password")
+      }
+      
+    }).catch((error) => console.error("Error fetching user data: ", error));
+
+
   // Navigate to the '/home' route with the data as state
-  navigate('/home', {
-    state: {
-      username: username,
-      password: password,
-    },
-  });
+
 };
 
   return (
