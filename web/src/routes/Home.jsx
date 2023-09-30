@@ -1,8 +1,21 @@
 // import Tab from 'react-bootstrap/Tab';
 // import Tabs from 'react-bootstrap/Tabs';
 // import Shop from './Shop';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Home() {
+    const {state} = useLocation();
+    console.log(state)
+    return (
+        <div>
+            <h1>Home</h1>
+                <p>
+        {state.first_name + " " + state.last_name + " " + state.username + " " + state.password + " " + state.financialDetails}
+        
+    </p>
+        </div>
+    )
+
     
     // return (
     //     <Tabs

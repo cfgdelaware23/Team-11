@@ -16,11 +16,15 @@ import Eligibility from './routes/Eligibility';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Register />,
+    element: <Landing />,
   },
   {
     path: "/eligibility",
     element: <Eligibility />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
   path: "/home",
