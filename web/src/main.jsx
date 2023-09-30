@@ -11,12 +11,14 @@ import Register from "./routes/register";
 import Container from "./routes/Container";
 import './index.css'
 import Eligibility from './routes/Eligibility';
+import SignIn from './routes/SignIn';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Container />,
+    element: <Landing />,
   },
   {
     path: "/eligibility",
@@ -30,6 +32,13 @@ const router = createBrowserRouter([
   path: "/home",
   element: <Container />,
 },
+{
+  path: "/sign-in",
+  element: <SignIn />,
+},
+
+
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

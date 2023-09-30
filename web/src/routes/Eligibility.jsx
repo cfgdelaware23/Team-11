@@ -11,23 +11,46 @@ export default function Eligibility(){
     const {state} = useLocation();
     
     const addCustomerToDB = (financialDetails) => {
-        // if getsnap is true, add "snap" to financialDetails, if getebt is true, add "ebt" to financialDetails, if gethousing is true, add "housing" to financialDetails
+        let qualifiers = new Set();
         if (getsnap){
-            financialDetails.push("snap");
+            qualifiers.add("snap");
         }
         if (getebt){
-            financialDetails.push("ebt");
+            qualifiers.add("ebt");
         }
         if (gethousing){
-            financialDetails.push("housing");
+            qualifiers.add("housing");
         }
-        state.financialDetails = financialDetails;
+
+        console.log(state);
+
+        fetch(`http://localhost:3000/user/signup`, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        user: {
+                            name: state.first_name + " " + state.last_name,
+                            username: state.username,
+                            qualifiers: {
+                                publicHousing: qualifiers.has("housing"),
+                                EBT: qualifiers.has("ebt"),
+                                SNAP: qualifiers.has("snap"),
+                            }
+                        }
+                    }
+                ),
+            }
+            
+        )
+
         navigate('/home', {
             state: state,
         });
         
-        
-
         
     }
     return (

@@ -2,6 +2,7 @@ import express from "express";
 import PurchaseHistory from "../models/purchase-history.model.js";
 import ProductData from "../models/product-data.model.js";
 import UserData from "../models/user-data.model.js";
+import IncomeCategory from "../models/income-category.model.js";
 const router = express.Router();
 
 router.post("/product/add", async (req, res) => {
@@ -62,9 +63,30 @@ router.post("/product/update", async (req, res) => {
     return;
 })
 
+router.post("/product/delete", async (req, res) => {
+    const product = req.body.product;
+    const id = product.productId;
+
+    if (!id) {
+        res.status(400).json('Product delete request must have a product with productId');
+        return
+    }
+
+    const deleted = await ProductData.deleteOne(id);
+
+    if (!deleted) {
+        res.status(400).json('Can not find specified product')
+        return;
+    }
+
+    res.status(200).json(deleted)
+    return;
+})
+
 router.get("/allPurchaseHistories", async (req, res) => {
-    const histories = await PurchaseHistory.find();
-    res.status(200).json(histories);
+    await PurchaseHistory.find()
+    .then((histories) => res.status(200).json(histories))
+    .catch((err) => res.status(400).json("Error: " + err));
     return;
 })
 
@@ -80,8 +102,14 @@ router.get("/userPurchaseHistory/:username", async (req, res) => {
 })
 
 router.get("/allCustomers", async (req, res) => {
-    const users = await UserData.find();
-    res.status(200).json(users);
+    await UserData.find()
+    .then((users) => {
+        res.status(200).json(users);
+    })
+    .catch((err) => {
+        res.status(400).json("Error: " + err);
+    });
+    
     return;
 })
 

@@ -1,30 +1,20 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import "./landing.css"
-import importImg from './logo.png';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
-import React, { useState, useEffect } from 'react';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import Shop from './Shop';
 
 export default function Home() {
     return (
-    <div>
-           <h1 className="header"> User Information Page</h1>
-            
-            <img className="logo3" src={importImg} alt='import' /><br />
-            <p>
-                Name:
-            </p> <br />
-            <p>
-                ID:
-            </p> <br />
-            <p>
-                Discount:
-            </p> <br />
-            </div>
-    )
+        <Tabs
+            defaultActiveKey="profile"
+            id="uncontrolled-tab-example"
+            className="mb-3 m-5 justify-center"
+        >
+            <Tab eventKey="home" title="Home">
+                Tab content for Home
+            </Tab>
+            <Tab eventKey="profile" title="Shop">
+                <Shop />
+            </Tab>
+        </Tabs>
+    );
 }
