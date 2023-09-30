@@ -1,30 +1,34 @@
 import UserData from "./models/user-data.model.js";
+import PurchaseHistory from "./models/purchase-history.model.js";
 
 export const createCustomer = async (user, res) => {
     const name = user.name;
     //const discount = user.discount;
+    const username = user.username;
     const housing = user.publicHousing;
     const currentStars = 0;
     const lastUpdate = new Date();
-    const lastUpdatedByUser = user.lastUpdatedByUser;
+    const lastUpdatedByUser = false;
 
-    calculateDiscount(user.qualifiers);
+    calculateDiscount(username, user.qualifiers);
 
-    if (!name || !discount || !username || !lastUpdatedByUser) {
+    if (!name || !discount || !username) {
         return res.status(400).json('User creation request lacks field')
     }
-    const newUser = new UserData({name, discount, username, lastUpdate, lastUpdatedByUser});
-    
+    const newUser = new UserData({name, discount, username, currentStars, lastUpdate, lastUpdatedByUser});
+    const newPurchaseHistory = new PurchaseHistory({username, history: []});
+    await newPurchaseHistory.save();
     let data = await newUser.save().then(() => {
-        res.json('User added!')
+        res.json('User added: ' + username)
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
+    
     return data;
 }
 
 export const getCustomer = async (username, res) => {
-    let userData = await UserData.find({username: username}).then((user) => {
+    let userData = await UserData.findOne({username: username}).then((user) => {
         res.json(user);
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
@@ -37,6 +41,11 @@ export const deleteCustomer = async (username, res) => {
         res.json('User deleted.')
     }
     ).catch((err) => {
+        res.status(400).json('Error: ' + err)
+    })
+    await PurchaseHistory.deleteOne({username: username}).then(() => {
+        res.json('User deleted.')
+    }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
     return userData;
@@ -67,6 +76,6 @@ export const updateCustomer = async (username, newUserData, res) => {
     user.lastUpdate = lastUpdate;
     user.lastUpdatedByUser = lastUpdatedByUser;
 
-    let resp = await user.savee().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
+    let resp = await user.save().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
     return resp
 }
