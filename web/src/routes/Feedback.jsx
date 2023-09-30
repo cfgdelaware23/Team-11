@@ -3,7 +3,7 @@ import './Feedback.css';
 import logoImage from '../logo.png';
 
 
-export default function FeedBack(){
+export default function Feedback(){
     const [selectedNutritionRating, setSelectedNutritionRating] = useState(null);
     function handleNutritionRatingClick(rating) {
         setSelectedNutritionRating(rating);
