@@ -19,11 +19,11 @@ export default function register() {
 
 
     return (
-<div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div className="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto flex-col justify-center m-24 bg-gray-50">
   <form>
 
       <div className="pt-0 p-4 sm:pt-0 sm:p-7">
-        <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+        <h1 className="text-2xl font-semibold" style={{ color: '#6e96a5' }}>
             Registration
         </h1>
 

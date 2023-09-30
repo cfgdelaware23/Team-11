@@ -11,7 +11,9 @@ export default function Container() {
     return (
         
         <div>
-<img className="logo3 -mb-16 ml-4 p-4" src={importImg} alt='import' class="w-24" />
+            <div className='w-2/3 -mb-24 ml-4 p-4'>
+            <img className="logo3" src={importImg} alt='import' />
+            </div>
 
         <Tabs
             defaultActiveKey="home" 
@@ -27,7 +29,7 @@ export default function Container() {
                 <Shop />
             </Tab>
 
-            <Tab eventKey="FeedBack" title="FeedBack">
+            <Tab eventKey="FeedBack" title="Feedback">
                   
                 <Feedback />
             </Tab>

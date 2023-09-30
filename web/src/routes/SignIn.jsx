@@ -19,7 +19,7 @@ export default function signIn() {
 };
 
   return (
-    <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div className="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto flex-col justify-center m-24 bg-gray-50">
       <form>
         <div className="pt-0 p-4 sm:pt-0 sm:p-7">
           <h1 className="text-2xl font-semibold" style={{ color: '#6e96a5' }}>
@@ -42,7 +42,7 @@ export default function signIn() {
             />
             <label
               id="af-submit-project-url"
-              className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"
+              className="inline-block text-sm font-medium text-gray-800 mt-3 dark:text-gray-200"
               style={{ color: '#666666' }} 
             >
               Password
