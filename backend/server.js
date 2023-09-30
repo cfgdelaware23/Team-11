@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./routes/user-routes.js";
 import cashierRouter from "./routes/cashier-routes.js";
+import adminRouter from "./routes/admin-routes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(json({
 
 app.use("/user", userRouter);
 app.use("/cashier", cashierRouter);
+app.use("/admin", adminRouter);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

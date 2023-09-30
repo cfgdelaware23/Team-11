@@ -1,19 +1,16 @@
-import { createCustomer } from "../controllers.js";
-import UserData from "../models/user-data.model.js";
+import { createCustomer, getCustomer } from "../controllers.js";
 
 import express from "express"
 const router = express.Router()
 
-router.get('/:id', (req, res) => {
-    UserData.findById(req.params.id).then((user) => {
-        res.json(user)
-    }).catch((err) => {
-        res.status(400).json('Error: ' + err)
-    })
+router.get('/:username', async (req, res) => {
+    let data = await getCustomer(req.params.username, res);   
+    return data
 })
 
-router.post('/signup', (req, res) => {
-    createCustomer(req.body.user);
+router.post('/signup', async (req, res) => {
+    let data = await createCustomer(req.body.user, res);
+    return data
 })
 
 export default router;
