@@ -8,8 +8,6 @@ import {
 
 import Landing from "./routes/Landing";
 import Register from "./routes/register";
-import Eligibility from "./routes/Eligibility";
-
 import Home from "./routes/Home";
 import './index.css'
 import Eligibility from './routes/Eligibility';
@@ -18,12 +16,20 @@ import Eligibility from './routes/Eligibility';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Eligibility />,
+    element: <Home />,
   },
   {
     path: "/eligibility",
-    element: <Landing />,
+    element: <Eligibility />,
   },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+  path: "/home",
+  element: <Home />,
+},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

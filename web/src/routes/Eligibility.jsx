@@ -1,14 +1,34 @@
 import React, {useState} from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Eligibility.css';
 import logoImage from '../logo.png';
-export default function Eligibility(props){
+export default function Eligibility(){
+    const navigate = useNavigate();
 
     const [getsnap, setsnap] = useState(false);
     const [getebt, setebt] = useState(false);
     const [gethousing, sethousing] = useState(false);
+    const {state} = useLocation();
+    
+    const addCustomerToDB = (financialDetails) => {
+        // if getsnap is true, add "snap" to financialDetails, if getebt is true, add "ebt" to financialDetails, if gethousing is true, add "housing" to financialDetails
+        if (getsnap){
+            financialDetails.push("snap");
+        }
+        if (getebt){
+            financialDetails.push("ebt");
+        }
+        if (gethousing){
+            financialDetails.push("housing");
+        }
+        state.financialDetails = financialDetails;
+        navigate('/home', {
+            state: state,
+        });
+        
+        
 
-    function redirect(){
-        alert("Go to next page")
+        
     }
     return (
         
@@ -24,7 +44,7 @@ export default function Eligibility(props){
             <h1 className="housingContainer">Do you have public housing?</h1>
             <button className="yesContainer" onClick={() => sethousing(true)}>YES</button>
             <button className="noContainer" onClick={() => sethousing(false)}>NO</button>
-            <button className="submitContainer" onClick={redirect}>Submit</button>
+            <button className="submitContainer" onClick={() => addCustomerToDB(state.financialDetails)}>Submit</button>
         </div>
     
     )
