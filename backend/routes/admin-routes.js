@@ -7,17 +7,17 @@ const router = express.Router();
 
 router.post("/product/add", async (req, res) => {
     const product = req.body.product;
-    const id = product.productId;
+    const productID = product.productID;
     const stars = product.stars;
-    const price = product.basePrice;
+    const basePrice = product.basePrice;
 
-    const found = await ProductData.findOne(id);
+    const found = await ProductData.findOne({productID});
     if(found) {
         res.status(400).json("Product already exists");
         return;
     }
     
-    const newProduct = new ProductData({id, stars, price});
+    const newProduct = new ProductData({productID, stars, basePrice});
     newProduct.save();
     res.status(200).json("Successfully added product!");
     return;

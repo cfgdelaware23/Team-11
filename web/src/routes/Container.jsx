@@ -12,7 +12,7 @@ export default function Container() {
         <Tabs
             defaultActiveKey="home" 
             id="uncontrolled-tab-example"
-            className="mb-3 m-5 justify-center"
+            className="m-5 justify-center"
         >
             <Tab eventKey="home" title="Home">
             <Home />
@@ -26,11 +26,6 @@ export default function Container() {
             <Tab eventKey="FeedBack" title="FeedBack">
                   
                 <Feedback />
-            </Tab>
-
-            <Tab eventKey="PreviousPurchases" title="Previous Purchases">
-                  
-                <PreviousPurchases />
             </Tab>
 
         </Tabs>
