@@ -6,9 +6,13 @@ import Feedback from './Feedback';
 import PreviousPurchases from './PreviousPurchases'
 import importImg from './logo.png';
 
+
 export default function Container() {
     return (
+        
         <div>
+<img className="logo3 mt-4 ml-4" src={importImg} alt='import' class="w-24" />
+
         <Tabs
             defaultActiveKey="home" 
             id="uncontrolled-tab-example"

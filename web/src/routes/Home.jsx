@@ -3,7 +3,7 @@ import "./landing.css";
 import importImg from './logo.png';
 import React, { useState, useEffect } from 'react';
 import "./Home.css"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import AppleImage from './food_images/apple.png';
 import AvocadoImage from './food_images/avocado.png';
 import AlmondImage from './food_images/almond.png';
@@ -27,6 +27,7 @@ import GarlicImage from './food_images/garlic.png';
 
 
 export default function Home() {
+    const navigate = useNavigate();
     const food_dictionary = {
         1: [AppleImage, "Organic Apple", "Fruits", "$1.50"],
         2: [AvocadoImage, "Organic Avocado", "Fruits", "$2.00"],
@@ -57,6 +58,14 @@ export default function Home() {
   const { username, password } = location.state;
   const [userData, setUserData] = useState({});
   const [purchaseHistory, setPurchaseHistory] = useState([]);
+
+//   const handleFeedback = () => {
+//     navigate('/feedback', {
+//       state: {
+//         username: username
+//       },
+//     });
+//   }
 
   useEffect(() => {
     fetch(`http://localhost:3000/user/${username}`)
@@ -96,8 +105,9 @@ export default function Home() {
 
   return (
     <div>
+        
       <h1 className="header">User Information Page</h1>
-      <img className="logo3" src={importImg} alt='import' /><br />
+      
       <p>
         Username: {userData.username} <br />
         Name: {userData.name} <br />

@@ -13,6 +13,7 @@ import './index.css'
 import Kiosk from "./routes/Kiosk";
 import Eligibility from './routes/Eligibility';
 import SignIn from './routes/SignIn';
+import FeedBack from './routes/Feedback';
 
 
 const router = createBrowserRouter([
@@ -39,8 +40,7 @@ const router = createBrowserRouter([
 {
   path: "/kiosk",
   element: <Kiosk />,
-}
-
+},
 
 
 ]);
