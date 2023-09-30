@@ -63,16 +63,16 @@ router.post("/product/update", async (req, res) => {
     return;
 })
 
-router.post("/product/delete", async (req, res) => {
+router.delete("/product/delete", async (req, res) => {
     const product = req.body.product;
-    const id = product.productId;
+    const productID = product.productID;
 
     if (!id) {
         res.status(400).json('Product delete request must have a product with productId');
         return
     }
 
-    const deleted = await ProductData.deleteOne({productID: id});
+    const deleted = await ProductData.deleteOne({productID});
 
     if (!deleted) {
         res.status(400).json('Cannot find specified product')
