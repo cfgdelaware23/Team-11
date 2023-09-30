@@ -49,23 +49,14 @@ export default function Eligibility() {
                 ),
             }
             
-        )
-
-        navigate('/home', {
-            state: state,
-        });
+        ).then(res=>res.json()).then(data=>{
+            navigate('/home', {
+                state: state,
+            });
+        })
         
         
     }
-
-    const buttonClass = (isActive) => {
-        return isActive ? 'yesContainer clicked' : 'yesContainer';
-      }
-    
-      // Modify the NO button classes
-      const nobuttonClass = (isActive, noClicked) => {
-        return isActive ? (noClicked ? 'noContainer clicked' : 'noContainer') : 'noContainer';
-      }
 
  return (
         <div className="Eligibility w-full flex flex-col items-center">
