@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import './Feedback.css';
-import logoImage from '../logo.png';
+import logoImage from './logo.png';
 
 
-export default function FeedBack(){
+export default function Feedback(){
     const [selectedNutritionRating, setSelectedNutritionRating] = useState(null);
     function handleNutritionRatingClick(rating) {
         setSelectedNutritionRating(rating);
@@ -25,10 +25,16 @@ export default function FeedBack(){
         alert("Thank you, we have recieved your feedback!");
 
     }
+
+    document.querySelectorAll('.ratingContainer, .rating2Container, .rating3Container, .rating4Container, .submitContainer').forEach(function(button) {
+        button.addEventListener('click', function() {
+            button.classList.add('pressed');
+        });
+    });
     return(
         
     <div className="Eligibility">
-        <img className="logo" src={logoImage} alt='import'></img><br/>
+        {/* <img className="logo" src={logoImage} alt='import'></img><br/> */}
         <h1 className="questionsContainer">How nutrious would you rank our food?</h1>
         <button className="ratingContainer" onClick={() => handleNutritionRatingClick(1)}>1</button>
         <button className="ratingContainer" onClick={() => handleNutritionRatingClick(2)}>2</button>

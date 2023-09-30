@@ -106,3 +106,10 @@
     margin-left: 680px;
     display: block;
 }
+
+.logo{
+  max-width: 10%; 
+  margin-left:10px;
+  margin-right:auto;
+  margin-top:20px;
+}

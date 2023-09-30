@@ -133,7 +133,7 @@ export default function Shop() {
            <h1 className="header">
         Product of the Day: {productOfTheDay}
       </h1>
-            <img className="logo3" src={importImg} alt='import' /><br />
+            {/* <img className="logo3" src={importImg} alt='import' /><br /> */}
             <InputGroup className="mb-3">
                 <FormControl
                     placeholder="Search products..."
