@@ -2,7 +2,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Shop from './Shop';
 import Home from './Home';
-import Feedback from './FeedBack';
+import Feedback from './Feedback';
 
 export default function Container() {
     return (
