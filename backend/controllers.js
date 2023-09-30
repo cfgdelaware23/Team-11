@@ -66,7 +66,7 @@ export const deleteCustomer = async (username, res) => {
         res.status(400).json('Error: ' + err)
     })
     await PurchaseHistory.deleteOne({username: username}).then(() => {
-        res.json('User deleted.')
+        res.status(200).json('User deleted.')
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
