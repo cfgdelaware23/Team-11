@@ -1,6 +1,6 @@
 import request from 'supertest';
 
-const testUsername = "unitTestUser1";
+const testUsername = "unitTestUser6";
 
 export async function UnitTest(app) {
     console.log("Testing user signup without phone number")
@@ -44,6 +44,22 @@ export async function UnitTest(app) {
     })
       .set('Accept', 'application/json')
       .expect(200, `"User added: ${testUsername}"`); 
+      
+      
+    console.log("Testing user fetching")
+      await request(app)
+        .get(`/user/${testUsername}`)
+        .send({})
+        .set('Accept', 'application/json')
+        .expect((res) => {
+            if ((res.body.name != "UnitTest") ||
+            (res.body.username != testUsername) ||
+            (res.body.discount != 0.5) ||
+            (res.body.currentStars != "0") ||
+            (res.body.lastUpdatedByUser != true)){
+                throw new Error("Wrong output: "+res.body.lastUpdatedByUser)
+            }
+        } );
 
     console.log("Testing user deletion")
       await request(app)
