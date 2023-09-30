@@ -60,16 +60,19 @@ export const getCustomer = async (username, res) => {
 
 export const deleteCustomer = async (username, res) => {
     let userData = await UserData.deleteOne({username: username}).then(() => {
-        res.json('User deleted.')
     }
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
     await PurchaseHistory.deleteOne({username: username}).then(() => {
-        res.json('User deleted.')
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
+    await IncomeCategory.deleteOne({username: username}).then(() => {
+    }).catch((err) => {
+        res.status(400).json('Error: ' + err)
+    })
+    res.json("User, associated purchase history, and income category deleted")
     return userData;
 } 
 
