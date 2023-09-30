@@ -3,6 +3,7 @@ import PurchaseHistory from "./models/purchase-history.model.js";
 import IncomeCategory from "./models/income-category.model.js";
 import FeedbackCategory from "./models/feedback.model.js";
 
+// tested
 export const createCustomer = async (user, res) => {
     if (!user || !user.name || !user.username 
         || user.qualifiers.publicHousing == null || user.qualifiers.EBT == null
@@ -45,6 +46,7 @@ export const createCustomer = async (user, res) => {
     return data;
 }
 
+// tested 
 export const getCustomer = async (username, res) => {
     let userData = await UserData.findOne({username: username}).then((user) => {
         if (!user){
@@ -58,9 +60,10 @@ export const getCustomer = async (username, res) => {
     return userData;
 } 
 
+// tested
 export const deleteCustomer = async (username, res) => {
     let userData = await UserData.deleteOne({username: username}).then(() => {
-        res.json('User deleted.')
+       // res.json('User deleted.')
     }
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
