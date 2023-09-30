@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 export default function register() {
     const navigate = useNavigate();
 
+    
+
     const handleRegister = () => {
         var customer = {
             first_name: document.getElementById("first").value,

@@ -8,22 +8,15 @@ export default function signIn() {
     const password = document.getElementById("password").value;
     const username = document.getElementById("username").value;
 
-    const data = await fetch(`http://localhost:3000/user/${username}`, {})
-    .then(res=>{
-      res.json()
-    })
-    .then(data=>{
-        navigate('/home', {
-      state: data,
-      });
-    
-    })
-    .catch(
-      err => {
-        console.log(err);
-      }
-    );
-  };
+ 
+  // Navigate to the '/home' route with the data as state
+  navigate('/home', {
+    state: {
+      username: username,
+      password: password,
+    },
+  });
+};
 
   return (
     <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
