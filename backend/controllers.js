@@ -31,7 +31,7 @@ export const createCustomer = async (user, res) => {
     const newUserCategory = new IncomeCategory({username, publicHousing, EBT, SNAP})
     await newUserCategory.save();
 
-    if (!name || !discount || !username) {
+    if (!name || discount == null || !username) {
         return res.status(400).json('User creation request lacks field')
     }
     const newUser = new UserData({name, discount, username, currentStars, lastUpdate, lastUpdatedByUser});
