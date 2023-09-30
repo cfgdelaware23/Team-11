@@ -1,5 +1,5 @@
 import PurchaseHistory from "../models/purchase-history.model.js";
-import { createCustomer, getCustomer, deleteCustomer } from "../controllers.js";
+import { createCustomer, getCustomer, deleteCustomer, updateCustomer, updateIncomeCategory } from "../controllers.js";
 
 import express from "express";
 const router = express.Router();
@@ -25,15 +25,30 @@ router.post("/addPurchase", async (req, res) => {
     return res.json("Successfully added purchase(s)!: " + purchases);
 })
 
-router.get("/user/:username", async (req, res)=>{
+router.get("/:username", async (req, res)=>{
     return getCustomer(req.params.username, res);
 })
 
-router.delete("/user/:username", async (req, res) => {
+router.delete("/:username", async (req, res) => {
     return deleteCustomer(req.params.username, res);
 })
 
-export const updateCustomer = async () => {
-}
+router.put("/update", async (req, res) => {
+    return updateCustomer(req.body.user, res);
+})
+
+router.put("/editIncomeCategory", async (req, res) => {
+    await updateIncomeCategory(req, res);
+    return;
+})
+
+router.post("/addfeedback", async (req, res) => {
+    try {
+        await updateFeedback(req.body.username, req.body.feedback);
+        res.status(200).json({ message: "Feedback added/updated successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "An error occurred while updating feedback" });
+    }
+})
 
 export default router;
