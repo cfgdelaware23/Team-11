@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './Feedback.css';
-import logoImage from '../logo.png';
+import logoImage from './logo.png';
 
 
 export default function FeedBack(){
@@ -46,7 +46,8 @@ export default function FeedBack(){
     return(
         
     <div className="Eligibility">
-        <img className="logo" src={logoImage} alt='import'></img><br/>
+        <h1 className="header">Give us your feedback! </h1>
+        {/* <img className="logo" src={logoImage} alt='import'></img><br/> */}
         <h1 className="questionsContainer">How nutrious would you rank our food?</h1>
         <button className={getNutritionButtonClass(1)} onClick={() => handleNutritionRatingClick(1)}>1</button>
       <button className={getNutritionButtonClass(2)} onClick={() => handleNutritionRatingClick(2)}>2</button>

@@ -12,6 +12,7 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
+        console.log(data);
       });
   })
 
