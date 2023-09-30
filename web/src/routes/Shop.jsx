@@ -114,7 +114,6 @@ export default function Shop() {
 
     function selectRandomProduct() {
         var num = Math.floor(Math.random() * groceryProducts.length);
-        console.log(num);
         let answer = "";
         const productToFind = groceryProducts.find(product => product.id === num);
         if (productToFind) {
