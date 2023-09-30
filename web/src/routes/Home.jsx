@@ -20,7 +20,7 @@ export default function Home() {
     <div>
            <h1 className="header"> User Information Page</h1>
             
-            <img className="logo3" src={importImg} alt='import' /><br />
+            {/* <img className="logo3" src={importImg} alt='import' /><br /> */}
             <h1 className="userName">Username: {userData.username}</h1>
             <h1 className="Name">Name: {userData.name}</h1>
             <h1 className="ID">ID: {userData._id}</h1>
