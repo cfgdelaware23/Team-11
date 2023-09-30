@@ -1,5 +1,6 @@
 import UserData from "./models/user-data.model.js";
 import PurchaseHistory from "./models/purchase-history.model.js";
+import IncomeCategory from "./models/income-category.model.js";
 
 export const createCustomer = async (user, res) => {
     if (!user || !user.name || !user.discount || !user.username || !user.publicHousing) {
@@ -14,6 +15,13 @@ export const createCustomer = async (user, res) => {
     const lastUpdatedByUser = false;
 
     const discount = calculateDiscount(user.qualifiers);
+
+    // commit the income category data for the new user to the database
+    const publicHousing = user.qualifiers.publicHousing;
+    const EBT = user.qualifiers.EBT;
+    const SNAP = user.qualifiers.SNAP;
+    const newUserCategory = new IncomeCategory({username, publicHousing, EBT, SNAP})
+    await newUserCategory.save();
 
     if (!name || !discount || !username) {
         return res.status(400).json('User creation request lacks field')
