@@ -20,6 +20,10 @@ const userDataSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phoneNumber: {
+        type: String,
+        required: false
+    },
     lastUpdate: {
         type: Date,
         required: true

@@ -13,8 +13,8 @@ export default function Kiosk() {
             <img src={bubly} alt="Bubly" id="bubly"/>
         </div>
         <div className="text">
-            <p id="caption1">39g sugar</p>
-            <p id="caption1">0g sugar</p>
+            <p className="caption1" id="red">39g sugar</p>
+            <p className="caption1" id="green">0g sugar</p>
         </div>
     </div>)
 }

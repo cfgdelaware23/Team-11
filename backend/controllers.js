@@ -8,7 +8,7 @@ export const createCustomer = async (user, res) => {
     if (!user || !user.name || !user.username 
         || user.qualifiers.publicHousing == null || user.qualifiers.EBT == null
         || user.qualifiers.SNAP == null) {
-        return res.status(400).json('request body should contain a user object with name, discount, username, and publicHousing')
+        return res.status(400).json('request body should contain a user object with name, username, and income qualifiers')
     }
     const name = user.name;
     //const discount = user.discount;
@@ -35,6 +35,11 @@ export const createCustomer = async (user, res) => {
         return res.status(400).json('User creation request lacks field')
     }
     const newUser = new UserData({name, discount, username, currentStars, lastUpdate, lastUpdatedByUser});
+
+    if (user.phoneNumber) {
+        newUser.phoneNumber = user.phoneNumber;
+    }
+
     const newPurchaseHistory = new PurchaseHistory({username, history: []});
     await newPurchaseHistory.save();
     let data = await newUser.save().then(() => {
@@ -62,7 +67,13 @@ export const getCustomer = async (username, res) => {
 
 // tested
 export const deleteCustomer = async (username, res) => {
-    let userData = await UserData.deleteOne({username: username}).then(() => {}
+    let usr = await UserData.findOne({username:username});
+    if (!usr) {
+        res.status(400).json("User does not exist");
+        return;
+    }
+
+    await UserData.deleteOne({username: username}).then(() => {}
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
@@ -78,8 +89,9 @@ export const deleteCustomer = async (username, res) => {
     }).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
-    res.json("User, associated purchase history, and income category deleted")
-    return userData;
+
+    res.status(200).json("User, associated purchase history, and income category deleted");
+    return;
 } 
 
 export const updateCustomer = async (newUserData, res) => {
