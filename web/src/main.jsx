@@ -8,7 +8,7 @@ import {
 
 import Landing from "./routes/Landing";
 import Register from "./routes/register";
-import Home from "./routes/Home";
+import Container from "./routes/Container";
 import './index.css'
 import Eligibility from './routes/Eligibility';
 
@@ -16,7 +16,7 @@ import Eligibility from './routes/Eligibility';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Container />,
   },
   {
     path: "/eligibility",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
   path: "/home",
-  element: <Home />,
+  element: <Container />,
 },
 ]);
 
