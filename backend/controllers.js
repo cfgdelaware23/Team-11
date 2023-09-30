@@ -3,11 +3,14 @@ import PurchaseHistory from "./models/purchase-history.model.js";
 
 export const createCustomer = async (user, res) => {
     const name = user.name;
-    const discount = user.discount;
+    //const discount = user.discount;
     const username = user.username;
+    const housing = user.publicHousing;
     const currentStars = 0;
     const lastUpdate = new Date();
     const lastUpdatedByUser = false;
+
+    calculateDiscount(username, user.qualifiers);
 
     if (!name || !discount || !username) {
         return res.status(400).json('User creation request lacks field')
