@@ -114,8 +114,10 @@ export const updateFeedback = async (username, feedback) => {
         return;
     }
 
-    const newFeedback = new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
+    const newFeedback = await new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
     newFeedback.save();
+    res.status(200).json(console.log("successfully added feedback"));
+    return;
 }
 
 export const updateIncomeCategory = async (req, res) => {
@@ -142,5 +144,4 @@ export const updateIncomeCategory = async (req, res) => {
     }).catch((err) => {
         res.status(400).json("Error: " + err);
     });
-    return;
 }
