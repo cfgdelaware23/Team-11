@@ -50,9 +50,6 @@ export default function Home() {
         19: [HoneyImage, "Raw Honey", "Sweeteners", "$6.50"],
         20: [GarlicImage, "Organic Garlic", "Vegetables", "$0.99"]
     }
-    
-    
-    
 
   const location = useLocation();
   const { username, password } = location.state;
@@ -68,13 +65,18 @@ export default function Home() {
 //   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/user/${username}`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/user/${username}`);
+        const data = await res.json();
         setUserData(data);
         console.log(data);
-      });
-  })
+    } catch (error) {
+      console.error("Error fetching user data: ", error);
+    }
+  };
+    fetchData();
+  }, [username]);
 
 
   useEffect(() => {
@@ -116,6 +118,10 @@ export default function Home() {
         Stars: {userData.currentStars} <br />
       </p> <br />
       <div className="w-9/12 mx-auto">
+      <h1 className="text-2xl font-semibold">
+              Previous Purchases
+      </h1>
+      <br />
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -138,9 +144,6 @@ export default function Home() {
                   <td className="px-6 py-4">{food_dictionary[item][1]}</td>
                   <td className="px-6 py-4">{food_dictionary[item][2]}</td>
                   <td className="px-6 py-4">{food_dictionary[item][3]}</td>
-                  <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Feedback</a>
-                  </td>
                 </tr>
               ))}
             </tbody>
