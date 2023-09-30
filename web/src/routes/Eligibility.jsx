@@ -5,43 +5,66 @@ import logoImage from '../logo.png';
 
 export default function Eligibility() {
   const navigate = useNavigate();
-  const { state } = useLocation();
 
-  const [getsnap, setsnap] = useState(false);
-  const [getebt, setebt] = useState(false);
-  const [gethousing, sethousing] = useState(false);
+    const [getsnap, setsnap] = useState(false);
+    const [getebt, setebt] = useState(false);
+    const [gethousing, sethousing] = useState(false);
+    const {state} = useLocation();
+    
+    const addCustomerToDB = (financialDetails) => {
+        let qualifiers = new Set();
+        if (getsnap){
+            qualifiers.add("snap");
+        }
+        if (getebt){
+            qualifiers.add("ebt");
+        }
+        if (gethousing){
+            qualifiers.add("housing");
+        }
 
-  // State variables for NO buttons
-  const [snapNoClicked, setSnapNoClicked] = useState(false);
-  const [ebtNoClicked, setEbtNoClicked] = useState(false);
-  const [housingNoClicked, setHousingNoClicked] = useState(false);
+        console.log(state);
 
-  const addCustomerToDB = (financialDetails) => {
-    if (getsnap) {
-      financialDetails.push("snap");
+        fetch(`http://localhost:3000/user/signup`, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        user: {
+                            name: state.first_name + " " + state.last_name,
+                            username: state.username,
+                            qualifiers: {
+                                publicHousing: qualifiers.has("housing"),
+                                EBT: qualifiers.has("ebt"),
+                                SNAP: qualifiers.has("snap"),
+                            }
+                        }
+                    }
+                ),
+            }
+            
+        )
+
+        navigate('/home', {
+            state: state,
+        });
+        
+        
     }
-    if (getebt) {
-      financialDetails.push("ebt");
-    }
-    if (gethousing) {
-      financialDetails.push("housing");
-    }
-    state.financialDetails = financialDetails;
-    navigate('/home', {
-      state: state,
-    });
-  }
 
-  const buttonClass = (isActive) => {
-    return isActive ? 'yesContainer clicked' : 'yesContainer';
-  }
+    const buttonClass = (isActive) => {
+        return isActive ? 'yesContainer clicked' : 'yesContainer';
+      }
+    
+      // Modify the NO button classes
+      const nobuttonClass = (isActive, noClicked) => {
+        return isActive ? (noClicked ? 'noContainer clicked' : 'noContainer') : 'noContainer';
+      }
 
-  // Modify the NO button classes
-  const nobuttonClass = (isActive, noClicked) => {
-    return isActive ? (noClicked ? 'noContainer clicked' : 'noContainer') : 'noContainer';
-  }
-
-  return (
+ return (
     <div className="Eligibility">
       <img className="logo" src={logoImage} alt='import'></img><br />
       <h1 className="snapContainer">Are you part of Snap?</h1>
@@ -61,3 +84,8 @@ export default function Eligibility() {
     </div>
   )
 }
+
+    
+    
+    
+

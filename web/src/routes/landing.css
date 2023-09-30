@@ -43,3 +43,10 @@
     background-color: #a49ea2;
   }
 
+.mb-3 {
+    width:500px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    margin-left:60px;
+    margin-right:auto;
+}

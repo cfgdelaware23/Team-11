@@ -8,15 +8,16 @@ import {
 
 import Landing from "./routes/Landing";
 import Register from "./routes/register";
-import Home from "./routes/Home";
+import Container from "./routes/Container";
 import './index.css'
 import Eligibility from './routes/Eligibility';
+import SignIn from './routes/SignIn';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Landing />,
   },
   {
     path: "/eligibility",
@@ -28,8 +29,15 @@ const router = createBrowserRouter([
   },
   {
   path: "/home",
-  element: <Home />,
+  element: <Container />,
 },
+{
+  path: "/sign-in",
+  element: <SignIn />,
+},
+
+
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

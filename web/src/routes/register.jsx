@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 export default function register() {
     const navigate = useNavigate();
 
+    
+
     const handleRegister = () => {
         var customer = {
             first_name: document.getElementById("first").value,
@@ -19,7 +21,6 @@ export default function register() {
     return (
 <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <form>
-
 
       <div className="pt-0 p-4 sm:pt-0 sm:p-7">
         <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">

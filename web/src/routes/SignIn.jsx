@@ -3,13 +3,20 @@ import { useNavigate } from 'react-router-dom';
 export default function signIn() {
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    navigate('/eligibility', {
-      password: document.getElementById("password").value,
-      username: document.getElementById("username").value,
-      financialDetails: [],
-    });
-  };
+  const handleSignIn = async () => {
+    
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+
+ 
+  // Navigate to the '/home' route with the data as state
+  navigate('/home', {
+    state: {
+      username: username,
+      password: password,
+    },
+  });
+};
 
   return (
     <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
