@@ -11,6 +11,7 @@ router.get('/:username', async (req, res) => {
 
 // tested and works on both nonexisting and existing users
 router.post('/signup', async (req, res) => {
+    req.body.user.lastUpdatedByUser = true;
     await createCustomer(req.body.user, res);
     return;
 })
@@ -19,6 +20,23 @@ router.post('/signup', async (req, res) => {
 router.put("/editIncomeCategory", async (req, res) => {
     await updateIncomeCategory(req, res);
     return;
+})
+
+router.post("/getdiscount", async (req, res) => {
+    const username = req.body.username;
+    try {
+        const user = await UserData.findOne({username: username});
+        
+        if (!user) {
+            return res.status(400).json("Cannot find user " + username);
+        }
+        res.status(200).json("successfully returned discount");
+        return user.discount;
+    } catch (err) {
+        console.error("Error getting discount:", err);
+        return res.status(400).json('Error getting discount');
+    }
+    
 })
 
 router.post("/addfeedback", async (req, res) => {

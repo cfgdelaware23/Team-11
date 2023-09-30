@@ -2,14 +2,51 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { useLocation } from 'react-router-dom';
 import "./landing.css"
 import importImg from './logo.png';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import React, { useState, useEffect } from 'react';
+import apple from "./apple.jpg";
+import bread from "./bread.jpg"
+import spinach from "./spinach.png"
+import water from "./water.png"
+import soda from "./soda.jpg"
+import strawberries from "./strawberries.jpg"
+import orange from "./orange.jpg"
+import pretzels from "./pretzels.png"
 
 export default function Shop() {
+    const location = useLocation();
+    const { username, password } = location.state;
+    const [userData, setUserData] = useState({});
+    useEffect(() => {
+        const fetchUserData = async () => {
+          try {
+            const res = await fetch(`http://localhost:3000/user/${username}`);
+            const data = await res.json();
+            setUserData(data);
+            console.log(data);
+          } catch (error) {
+            console.error("Error fetching user data: ", error);
+          }
+        };
+        fetchUserData();
     
+        const fetchPurchaseHistory = async () => {
+          try {
+            const res = await fetch(`http://localhost:3000/admin/userPurchaseHistory/${username}`);
+            const data = await res.json();
+            setPurchaseHistory(data.history);
+            console.log(data.history);
+          } catch (error) {
+            console.error("Error fetching purchase history: ", error);
+          }
+        };
+        fetchPurchaseHistory();
+      }, [username]);
+
 
     const groceryProducts = [
         {
@@ -21,6 +58,8 @@ export default function Shop() {
             inStock: true,
             discount: false,
             id: 0,
+            image: apple,
+            
         },
         {
             name: "Whole Grain Bread",
@@ -31,6 +70,7 @@ export default function Shop() {
             inStock: true,
             discount: true,
             id: 1,
+            image: bread,
         },
         {
             name: "Fresh Spinach",
@@ -41,6 +81,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 2,
+            image: spinach,
         },
         {
             name: "Sparkling Water",
@@ -51,6 +92,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 3,
+            image: water,
         },
         {
             name: "Sugar Free Soda",
@@ -61,6 +103,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 4,
+            image: soda,
         },
         {
             name: "Strawberries",
@@ -71,6 +114,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 5,
+            image: strawberries
         },
         {
             name: "Pretzels",
@@ -81,6 +125,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 6,
+            image: pretzels
         },
         {
             name: "Orange Juice",
@@ -91,6 +136,7 @@ export default function Shop() {
             inStock: false,
             discount: false,
             id: 7,
+            image: orange
         },
         
     ];
@@ -140,25 +186,26 @@ export default function Shop() {
                     onChange={handleSearchChange}
                 />
             </InputGroup>
-            <Container className='justify-center'>
+            <div className='justify-center'>
                 <Row>
                     {filteredProducts.map((product, index) => (
                         <Col xs={12} sm={7} md={4} lg={3} key={index}>
                             <Card style={{ width: '18rem' }}>
+                            <img src={product.image}/> {/* Add this img tag */}
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Text>
                                         {product.description}
                                     </Card.Text>
                                     <Card.Text>
-                                        ${product.price}
+                                    ${product.discount = 0.5 ?  (product.price * 0.5).toFixed(2) : product.price}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
-            </Container>
+            </div>
         </div>
     );
 }

@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PreviousPurchases.css';
 import logoImage from '../logo.png';
+
 export default function PreviousPurchases(){
     function request(){
         alert("Thank you, we have recieved your feedback!");
@@ -49,7 +50,7 @@ export default function PreviousPurchases(){
         {/* <img className="logo" src={logoImage} alt='import'></img><br/> */}
         <h1 className="header">Here are your previous purchases: </h1>
         {/* <div className="PreviousContainer"></div> */}
-        <Container className='justify-center'>
+        <div className='justify-center'>
                 <Row>
                     {groceryProducts.map((product, index) => (
                         <Col xs={12} sm={7} md={4} lg={3} key={index}>
@@ -67,7 +68,7 @@ export default function PreviousPurchases(){
                         </Col>
                     ))}
                 </Row>
-            </Container>
+            </div>
         </div>
     )
 }
