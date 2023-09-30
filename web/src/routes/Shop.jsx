@@ -43,25 +43,23 @@ export default function Shop() {
        <div> 
         <h1>Product of the Day!</h1>
         <Container className='justify-center'>
-       <Row>
-           {groceryProducts.map((product, index) => (
-               <Col>
-                   <Card style={{ width: '18rem' }}>
-                       <Card.Img variant="top" src="holder.js/100px180" />
-                       <Card.Body>
-                           <Card.Title>Card Title</Card.Title>
-                           <Card.Text>
-                               Some quick example text to build on the card title and make up the
-                               bulk of the card's content.
-                           </Card.Text>
-                           <Button variant="primary">Go somewhere</Button>
-                       </Card.Body>
-                   </Card>
-               </Col>
-           ))}
-       </Row>
-   </Container>
-   </div>
-       
+            <Row>
+                {groceryProducts.map((product, index) => (
+                    <Col>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title>{product.name}</Card.Title>
+                                <Card.Text>
+                                    {product.description}
+                                </Card.Text>
+                                <Card.Text>
+                                    ${product.price}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     );
 }
