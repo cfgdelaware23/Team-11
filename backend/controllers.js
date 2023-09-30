@@ -3,6 +3,7 @@ import PurchaseHistory from "./models/purchase-history.model.js";
 import IncomeCategory from "./models/income-category.model.js";
 import FeedbackCategory from "./models/feedback.model.js";
 
+// tested
 export const createCustomer = async (user, res) => {
     if (!user || !user.name || !user.username 
         || user.qualifiers.publicHousing == null || user.qualifiers.EBT == null
@@ -14,7 +15,7 @@ export const createCustomer = async (user, res) => {
     const username = user.username;
     const currentStars = 0;
     const lastUpdate = new Date();
-    const lastUpdatedByUser = false;
+    const lastUpdatedByUser = user.lastUpdatedByUser;
 
     const existing = await UserData.findOne({username: username});
     if (existing) {
@@ -45,6 +46,7 @@ export const createCustomer = async (user, res) => {
     return data;
 }
 
+// tested 
 export const getCustomer = async (username, res) => {
     let userData = await UserData.findOne({username: username}).then((user) => {
         if (!user){
@@ -58,14 +60,18 @@ export const getCustomer = async (username, res) => {
     return userData;
 } 
 
+// tested
 export const deleteCustomer = async (username, res) => {
-    let userData = await UserData.deleteOne({username: username}).then(() => {
-    }
+    let userData = await UserData.deleteOne({username: username}).then(() => {}
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
-    await PurchaseHistory.deleteOne({username: username}).then(() => {
-    }).catch((err) => {
+    
+    await IncomeCategory.deleteOne({username: username}).then((_) => {})
+    .catch((err) => res.status(400).json('Error: ' + err)); 
+
+    await PurchaseHistory.deleteOne({username: username}).then(() => {})
+      .catch((err) => {
         res.status(400).json('Error: ' + err)
     })
     await IncomeCategory.deleteOne({username: username}).then(() => {
@@ -78,33 +84,42 @@ export const deleteCustomer = async (username, res) => {
 
 export const updateCustomer = async (newUserData, res) => {
     const username = newUserData.username;
-    const user = UserData.findOne({ username: username }).then((foundUsr) => {
-        if (!foundUsr) {
-            res.status(400).json("Cannot find user " + username)
+
+    try {
+        const user = await UserData.findOne({ username: username });
+
+        if (!user) {
+            return res.status(400).json("Cannot find user " + username);
         }
-    }).catch((err) => {
-        res.status(400).json('Error when searching customer: ' + err)
-    })
 
-    const name = newUserData.name
-    const discount = newUserData.discount
-    const currentStars = newUserData.currentStars
-    const lastUpdate = new Date()
-    const lastUpdatedByUser = newUserData.lastUpdatedByUser
+        user.name = newUserData.name;
+        //user.discount = newUserData.discount;
+        //user.currentStars = newUserData.currentStars;
+        user.lastUpdate = new Date();
+        user.lastUpdatedByUser = newUserData.lastUpdatedByUser;
 
-    if (!name || !discount || currentStars || !username || !lastUpdatedByUser) {
-        return res.status(400).json('User creation request lacks field')
+        const discount = await calculateDiscount(newUserData.qualifiers);
+        user.discount = discount;
+
+        // commit the new income category data to the database
+        const existingUserCategory = await IncomeCategory.findOne({username:username});
+        if (!existingUserCategory) {
+            res.status(400).json("Cannot find user category despite user existing, this should not happen");
+        }
+        existingUserCategory.publicHousing = newUserData.qualifiers.publicHousing;
+        existingUserCategory.EBT = newUserData.qualifiers.EBT;
+        existingUserCategory.SNAP = newUserData.qualifiers.SNAP;
+        await existingUserCategory.save();
+
+        await user.save();
+
+        return res.json("User updated");
+    } catch (err) {
+        console.error("Error when updating customer:", err);
+        return res.status(400).json('Error updating customers');
     }
-
-    user.name = name;
-    user.discount = discount;
-    user.currentStars = currentStars;
-    user.lastUpdate = lastUpdate;
-    user.lastUpdatedByUser = lastUpdatedByUser;
-
-    let resp = await user.save().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
-    return resp
 }
+
 
 //Can change this function depending on how the discount will be calculated given the qualifiers of the customer
 export const calculateDiscount = async (qualifiers) => {
