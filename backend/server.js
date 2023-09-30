@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user-routes.js";
 import cashierRouter from "./routes/cashier-routes.js";
 import adminRouter from "./routes/admin-routes.js";
+import { UnitTest } from "./unit-tests.js";
 
 dotenv.config();
 
@@ -40,3 +41,5 @@ connection.once('open', () => {
 app.listen(process.env.PORT, () => {
     console.log("Server opened");
 })
+
+UnitTest(app);
