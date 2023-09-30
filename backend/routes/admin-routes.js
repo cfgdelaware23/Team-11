@@ -63,8 +63,9 @@ router.post("/product/update", async (req, res) => {
 })
 
 router.get("/allPurchaseHistories", async (req, res) => {
-    const histories = await PurchaseHistory.find();
-    res.status(200).json(histories);
+    const histories = await PurchaseHistory.find()
+    .then((histories) => res.status(200).json(histories))
+    .catch((err) => res.status(400).json("Error: " + err));
     return;
 })
 
