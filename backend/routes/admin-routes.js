@@ -3,11 +3,7 @@ import express from "express";
 import UserData from "../models/user-data.model.js";
 const router = express.Router();
 
-<<<<<<< HEAD
 router.post("/product/add", async (req, res) => {
-=======
-router.post("/addProduct", async (req, res) => {
->>>>>>> 2f8e89367bb6ed0e58efca05516ac881662221a4
     const product = req.body.product;
     const id = product.productId;
     const stars = product.stars;
