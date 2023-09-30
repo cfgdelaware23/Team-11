@@ -79,3 +79,10 @@ export const updateCustomer = async (username, newUserData, res) => {
     let resp = await user.save().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
     return resp
 }
+
+//Can change this function depending on how the discount will be calculated given the qualifiers of the customer
+export const calculateDiscount = async (username, qualifiers) => {
+    if(qualifiers.publicHousing || qualifiers.ebt || qualifiers.snap) {
+        
+    }
+}
