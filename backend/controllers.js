@@ -113,6 +113,13 @@ export const updateCustomer = async (newUserData, res) => {
         const discount = await calculateDiscount(newUserData.qualifiers);
         user.discount = discount;
 
+        if (newUserData.phoneNumber) {
+            user.phoneNumber = newUserData.phoneNumber;
+        }
+        else {
+            user.phoneNumber = null;
+        }
+
         // commit the new income category data to the database
         const existingUserCategory = await IncomeCategory.findOne({username:username});
         if (!existingUserCategory) {
