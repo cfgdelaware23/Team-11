@@ -63,7 +63,8 @@ export const deleteCustomer = async (username, res) => {
     return userData;
 } 
 
-export const updateCustomer = async (username, newUserData, res) => {
+export const updateCustomer = async (newUserData, res) => {
+    const username = newUserData.username;
     const user = UserData.findOne({ username: username }).then((foundUsr) => {
         if (!foundUsr) {
             res.status(400).json("Cannot find user " + username)
