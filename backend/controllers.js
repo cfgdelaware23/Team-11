@@ -1,5 +1,6 @@
 import UserData from "./models/user-data.model.js";
 import PurchaseHistory from "./models/purchase-history.model.js";
+import FeedbackCategory from "./models/feedback.model.js";
 
 export const createCustomer = async (user, res) => {
     if (!user || !user.name || !user.discount || !user.username || !user.publicHousing) {
@@ -89,4 +90,20 @@ export const calculateDiscount = async (qualifiers) => {
         return 0.5;
     }
     return 0;
+}
+
+export const updateFeedback = async (username, feedback) => {
+    if(!username || !feedback.nutrition || !feedback.affordability || !feedback.satisfaction || feedback.ease) {
+        res.status(400).json(console.log("Missing information"));
+        return;
+    }
+
+    const user = await UserData.findOne({username: username});
+
+    if(!user) {
+        res.status(400).json(console.log("User not found"));
+        return;
+    }
+
+    const newFeedback = new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
 }
