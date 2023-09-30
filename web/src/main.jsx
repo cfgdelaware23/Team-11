@@ -6,14 +6,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Landing from "./routes/Landing";
-
+import Home from "./routes/Home";
 import './index.css'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
+    element: <Home />,
   },
 ]);
 
