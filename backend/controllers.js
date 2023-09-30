@@ -65,6 +65,8 @@ export const deleteCustomer = async (username, res) => {
 } 
 
 export const updateCustomer = async (newUserData, res) => {
+    console.log("hi");
+
     const username = newUserData.username;
     const user = UserData.findOne({ username: username }).then((foundUsr) => {
         if (!foundUsr) {
