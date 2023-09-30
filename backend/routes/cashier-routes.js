@@ -1,5 +1,5 @@
 import PurchaseHistory from "../models/purchase-history.model.js";
-import { createCustomer, getCustomer, deleteCustomer } from "../controllers.js";
+import { createCustomer, getCustomer, deleteCustomer, updateCustomer } from "../controllers.js";
 
 import express from "express";
 const router = express.Router();
@@ -25,15 +25,16 @@ router.post("/addPurchase", async (req, res) => {
     return res.json("Successfully added purchase(s)!: " + purchases);
 })
 
-router.get("/user/:username", async (req, res)=>{
+router.get("/:username", async (req, res)=>{
     return getCustomer(req.params.username, res);
 })
 
-router.delete("/user/:username", async (req, res) => {
+router.delete("/:username", async (req, res) => {
     return deleteCustomer(req.params.username, res);
 })
 
-export const updateCustomer = async () => {
-}
+router.put("/update", async (req, res) => {
+    return updateCustomer(req.body.user, res);
+})
 
 export default router;
