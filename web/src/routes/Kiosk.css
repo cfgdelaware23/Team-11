@@ -24,10 +24,16 @@
     margin-left: 170px;
     margin-right: 270px;
 }
-#caption1 {
+.caption1 {
     display: flex;
     justify-content: center;
     text-align: center; 
     font-size: 30px;
     font-weight: bold;
+}
+#red {
+    color: red;
+}
+#green {
+    color: green;
 }
