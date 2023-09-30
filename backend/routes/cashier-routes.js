@@ -14,7 +14,7 @@ router.post("/addPurchase", async (req, res) => {
     const user = await PurchaseHistory.findOne({username: username});
     
     if(!user) {
-        res.status(404).json(console.log("User not found"));
+        res.status(400).json(console.log("User not found"));
         return;
     }
 

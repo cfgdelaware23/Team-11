@@ -1,8 +1,9 @@
 import ProductData from "../models/product-data.model.js";
 import express from "express";
+import UserData from "../models/user-data.model.js";
 const router = express.Router();
 
-router.post("/addproduct", async (req, res) => {
+router.post("/addProduct", async (req, res) => {
     const product = req.body.product;
     const id = product.productId;
     const stars = product.stars;
@@ -17,6 +18,12 @@ router.post("/addproduct", async (req, res) => {
     const newProduct = new ProductData({id, stars, price});
     newProduct.save();
     res.status(200).json("Successfully added product!");
+    return;
+})
+
+router.get("/allCustomers", async (req, res) => {
+    const users = await UserData.find();
+    res.status(200).json(users);
     return;
 })
 

@@ -40,6 +40,11 @@ export const deleteCustomer = async (username, res) => {
     ).catch((err) => {
         res.status(400).json('Error: ' + err)
     })
+    await PurchaseHistory.deleteOne({username: username}).then(() => {
+        res.json('User deleted.')
+    }).catch((err) => {
+        res.status(400).json('Error: ' + err)
+    })
     return userData;
 } 
 
@@ -68,6 +73,6 @@ export const updateCustomer = async (username, newUserData, res) => {
     user.lastUpdate = lastUpdate;
     user.lastUpdatedByUser = lastUpdatedByUser;
 
-    let resp = await user.savee().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
+    let resp = await user.save().then(() => res.json("User updated")).catch((err) => res.status(400).json("Error: " + err))
     return resp
 }
