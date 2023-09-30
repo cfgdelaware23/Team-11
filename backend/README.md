@@ -1,14 +1,14 @@
 # Backend Code
-This is the backend code for our project. The backend code is linked to a MongoDB database which holds all information about each customer. Each customer 
+This is the backend code for our project. The backend code is linked to a MongoDB Atlas database which holds all information of each customer and product.
 
 ## Schemas
-There are four database schemas to our code.
+There are five database schemas to our code.
 
 ###     1. Feedback
 The feedback schema stores user's usernames and numeric values for four variables: nutrition, affordability, satisfaction, and ease. The username is stored to track the unique feedback that each customer gives. Nutrition, affordability, ease, and satisfaction all store an number between one and five answering the following questions respectively - how nutrious would you rank our food, how affordable are our products to you, how easy has the process regarding membership, and how satisfied are you with Wellfare?
 
 ###     2. Income categories
-The income categories schema stores user's usernames and boolean values for three variables: publicHousing, EBT, and SNAP. The username is used to identify which user the values correspond to. If a user qualifies for a program, its variable value will be set to true.
+The income categories schema stores user's usernames and boolean values for three variables: publicHousing, EBT, and SNAP. The username is used to identify which user the values correspond to. If a user qualifies for a program, its variable value will be set to true. Custom policies can be set to compute discount factors of a user from these categories
 ###     3. Product data
 The product data schema stores three variable for every product: productID, stars, and basePrice. The ID is a unique ID given to each product, the stars represent a health rating out of four of the product, and the base price represents the origional price of the product. Administrators can add and delete products to the product data collection.
 ###     4. Purchase history
