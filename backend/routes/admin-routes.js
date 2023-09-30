@@ -63,8 +63,9 @@ router.post("/product/update", async (req, res) => {
 })
 
 router.get("/allPurchaseHistories", async (req, res) => {
-    const histories = await PurchaseHistory.find();
-    res.status(200).json(histories);
+    await PurchaseHistory.find()
+    .then((histories) => res.status(200).json(histories))
+    .catch((err) => res.status(400).json("Error: " + err));
     return;
 })
 
@@ -80,8 +81,14 @@ router.get("/userPurchaseHistory/:username", async (req, res) => {
 })
 
 router.get("/allCustomers", async (req, res) => {
-    const users = await UserData.find();
-    res.status(200).json(users);
+    await UserData.find()
+    .then((users) => {
+        res.status(200).json(users);
+    })
+    .catch((err) => {
+        res.status(400).json("Error: " + err);
+    });
+    
     return;
 })
 
