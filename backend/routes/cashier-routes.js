@@ -5,6 +5,7 @@ import express from "express";
 const router = express.Router();
 
 router.post("/create", async (req, res) => {
+    req.body.user.lastUpdatedByUser = false;
     return createCustomer(req.body.user, res);
 })
 
@@ -33,7 +34,9 @@ router.delete("/:username", async (req, res) => {
     return deleteCustomer(req.params.username, res);
 })
 
+//tested and works
 router.put("/update", async (req, res) => {
+    req.body.user.lastUpdatedByUser = false;
     return updateCustomer(req.body.user, res);
 })
 
