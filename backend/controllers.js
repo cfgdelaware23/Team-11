@@ -117,3 +117,30 @@ export const updateFeedback = async (username, feedback) => {
     const newFeedback = new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
     newFeedback.save();
 }
+
+export const updateIncomeCategory = async (req, res) => {
+    const username = req.body.username
+    const publicHousing = req.body.publicHousing
+    const EBT = req.body.EBT
+    const SNAP = req.body.SNAP
+
+    if (username == null || publicHousing == null || EBT == null || SNAP == null) {
+        res.status(400).json('Updating incomoe category requires all fields to be set');
+        return;
+    }
+
+    const user = await IncomeCategory.findOne({username:username})
+    
+    if (!user) {
+        res.status(400).json('User does not exist');
+        return;
+    }
+
+    user.overwrite(req.body);
+    await user.save().then((_) => {
+        res.status(200).json("Successfully updated user");
+    }).catch((err) => {
+        res.status(400).json("Error: " + err);
+    });
+    return;
+}

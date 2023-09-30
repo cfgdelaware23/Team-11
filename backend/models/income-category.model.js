@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
+// when adding new categories, please edit the functions in controller that update the database on this   
 const incomeCategorySchema = mongoose.Schema({
     username: {
         type: String,
