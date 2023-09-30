@@ -10,6 +10,7 @@ import Landing from "./routes/Landing";
 import Register from "./routes/register";
 import Container from "./routes/Container";
 import './index.css'
+import Kiosk from "./routes/Kiosk";
 import Eligibility from './routes/Eligibility';
 import SignIn from './routes/SignIn';
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   path: "/sign-in",
   element: <SignIn />,
 },
+{
+  path: "/kiosk",
+  element: <Kiosk />,
+}
 
 
 
