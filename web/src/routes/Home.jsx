@@ -113,7 +113,7 @@ export default function Home() {
       <p className="text-red-900 w-9/12 mx-auto text-xl">
         Username: {userData.username} <br />
         Name: {userData.name} <br />
-        ID: {userData._id} <br />
+        {/* ID: {userData._id} <br /> */}
         Discount: {userData.discount*100} % <br />
         Stars: {userData.currentStars} <br />
       </p> <br />

@@ -188,10 +188,9 @@ export default function Shop() {
                 />
             </InputGroup>
             <div className='justify-center'>
-                <Row className='m-5'>
+                <div className='m-5 flex flex-wrap w-full'>
                     {filteredProducts.map((product, index) => (
-                        <Col xs={12} sm={7} md={4} lg={3} key={index}>
-                            <Card style={{ width: '18rem' }}>
+                            <Card key={"product"+index} style={{ width: '18rem', marginRight:"2rem", marginBottom:"2rem" }}>
                             <img src={product.image}/> {/* Add this img tag */}
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
@@ -204,11 +203,9 @@ export default function Shop() {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                            <br />
-                            <br />
-                        </Col>
+                        
                     ))}
-                </Row>
+                </div>
             </div>
         </div>
       </div>

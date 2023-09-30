@@ -47,7 +47,7 @@ export default function FeedBack(){
         
     <div className="Eligibility">
         <h1 className="header">Give us your feedback! </h1>
-        <div className="w-9/12 mx-auto">
+        <div className="w-full mx-auto">
         {/* <img className="logo" src={logoImage} alt='import'></img><br/> */}
         <h1 className="questionsContainer">How nutrious would you rank our food?</h1>
         <button className={getNutritionButtonClass(1)} onClick={() => handleNutritionRatingClick(1)}>1</button>
