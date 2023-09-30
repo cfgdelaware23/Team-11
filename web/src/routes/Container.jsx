@@ -28,11 +28,6 @@ export default function Container() {
                 <Feedback />
             </Tab>
 
-            <Tab eventKey="PreviousPurchases" title="Previous Purchases">
-                  
-                <PreviousPurchases />
-            </Tab>
-
         </Tabs>
        
         </div>
