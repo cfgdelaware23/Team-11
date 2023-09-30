@@ -26,17 +26,9 @@ export default function Eligibility(props){
             <button className="noContainer" onClick={() => sethousing(false)}>NO</button>
             <button className="submitContainer" onClick={redirect}>Submit</button>
         </div>
-     
+    
     )
-    if (getsnap){
-        props.append(true);
-    }
-    if (getebt){
-        props.append(true);
-    }
-    if (gethousing){
-        props.append(true);
-    }
+    
     
     
 }
