@@ -105,15 +105,14 @@ export default function Home() {
 
   return (
     <div>
-<<<<<<< HEAD
         
       <h1 className="header">User Information Page</h1>
       
-      <p>
+      <p className="text-red-900 w-9/12 mx-auto text-xl">
         Username: {userData.username} <br />
         Name: {userData.name} <br />
         ID: {userData._id} <br />
-        Discount: {userData.discount} <br />
+        Discount: {userData.discount*100} % <br />
         Stars: {userData.currentStars} <br />
       </p> <br />
       <div className="w-9/12 mx-auto">
@@ -151,27 +150,6 @@ export default function Home() {
       <br />
     </div>
   );
-=======
-           <h1 className="header"> User Information Page</h1>
-            
-            {/* <img className="logo3" src={importImg} alt='import' /><br /> */}
-            <h1 className="userName">Username: {userData.username}</h1>
-            <h1 className="Name">Name: {userData.name}</h1>
-            <h1 className="ID">ID: {userData._id}</h1>
-            <h1 className="Discount">Discount: {userData.discount}</h1>
-            <h1 className="Stars">Stars: {userData.currentStars}</h1>
-            {/* <p>
-            Username: {userData.username} <br />
-            Name: {userData.name} <br />
-            ID: {userData._id} <br />
-            Discount: {userData.discount} <br />
-            Stars: {userData.currentStars} <br/>
-            </p> <br />
-            <p>
-            </p> <br /> */}
-            </div>
-    )
->>>>>>> 184d6b68fb35a899875943fc6998c44a0ad0f459
 }
 
 

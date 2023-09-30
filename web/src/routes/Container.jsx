@@ -11,7 +11,7 @@ export default function Container() {
     return (
         
         <div>
-<img className="logo3 mt-4 ml-4" src={importImg} alt='import' class="w-24" />
+<img className="logo3 -mb-16 ml-4 p-4" src={importImg} alt='import' class="w-24" />
 
         <Tabs
             defaultActiveKey="home" 
