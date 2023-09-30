@@ -7,10 +7,13 @@ export default function Eligibility() {
   const navigate = useNavigate();
 
     const [getsnap, setsnap] = useState(false);
+    const [snapNoClicked, setSnapNoClicked] = useState(false);
     const [getebt, setebt] = useState(false);
+    const [ebtNoClicked, setEbtNoClicked] = useState(false);
     const [gethousing, sethousing] = useState(false);
+    const [housingNoClicked, setHousingNoClicked] = useState(false);
     const {state} = useLocation();
-    
+
     const addCustomerToDB = (financialDetails) => {
         let qualifiers = new Set();
         if (getsnap){
