@@ -72,19 +72,14 @@ router.post("/product/delete", async (req, res) => {
         return
     }
 
-    const deleted = await ProductData.deleteOne(id)
+    const deleted = await ProductData.deleteOne(id);
 
-    const found = await ProductData.findOne( id);
-    if(!found) {
-        res.status(400).json('Product id does not exist');
+    if (!deleted) {
+        res.status(400).json('Can not find specified product')
         return;
     }
 
-    await found.save().then((updated) => {
-        res.status(200).json(updated)
-    }).catch((err) => {
-        res.status(400).json("Error: " + err)
-    });
+    res.status(200).json(deleted)
     return;
 })
 
