@@ -14,8 +14,8 @@ const incomeCategorySchema = mongoose.Schema({
         type: Boolean,
         required: true
     },
-    monthlyIncome: {
-        type: Number,
+    SNAP: {
+        type: Boolean,
         required: true
     }
 });
