@@ -178,6 +178,7 @@ export default function Shop() {
            <h1 className="header">
         Product of the Day: {productOfTheDay}
       </h1>
+      <div className='w-9/12 mx-auto'>
             {/* <img className="logo3" src={importImg} alt='import' /><br /> */}
             <InputGroup className="mb-3">
                 <FormControl
@@ -187,7 +188,7 @@ export default function Shop() {
                 />
             </InputGroup>
             <div className='justify-center'>
-                <Row>
+                <Row className='m-5'>
                     {filteredProducts.map((product, index) => (
                         <Col xs={12} sm={7} md={4} lg={3} key={index}>
                             <Card style={{ width: '18rem' }}>
@@ -202,10 +203,14 @@ export default function Shop() {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
+                            <br />
+                            <br />
                         </Col>
                     ))}
                 </Row>
             </div>
         </div>
+      </div>
+
     );
 }
