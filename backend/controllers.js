@@ -2,11 +2,13 @@ import UserData from "./models/user-data.model.js";
 
 export const createCustomer = async (user, res) => {
     const name = user.name;
-    const discount = user.discount;
-    const username = user.username;
+    //const discount = user.discount;
+    const housing = user.publicHousing;
     const currentStars = 0;
     const lastUpdate = new Date();
     const lastUpdatedByUser = user.lastUpdatedByUser;
+
+    calculateDiscount(user.qualifiers);
 
     if (!name || !discount || !username || !lastUpdatedByUser) {
         return res.status(400).json('User creation request lacks field')
@@ -58,4 +60,8 @@ export const updateCustomer = async (username, newUserData, res) => {
     if (!name || !discount || currentStars || !username || !lastUpdatedByUser) {
         return res.status(400).json('User creation request lacks field')
     }
+}
+
+export const calculateDiscount = async (qualifications) => {
+
 }
