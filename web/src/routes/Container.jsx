@@ -12,7 +12,6 @@ export default function Container() {
             id="uncontrolled-tab-example"
             className="mb-3 m-5 justify-center"
         >
-            
             <Tab eventKey="home" title="Home">
             <Home />
             </Tab>
