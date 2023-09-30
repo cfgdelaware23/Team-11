@@ -35,7 +35,7 @@ router.get("/product/:productID", async (req, res) => {
     return;
 })
 
-router.post("/product/update", async (req, res) => {
+router.put("/product/update", async (req, res) => {
     const product = req.body.product;
     const id = product.productId;
     const stars = product.stars;
