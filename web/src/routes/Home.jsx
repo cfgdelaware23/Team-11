@@ -1,6 +1,8 @@
+
 import "./landing.css";
 import importImg from './logo.png';
 import React, { useState, useEffect } from 'react';
+import "./Home.css"
 import { useLocation } from 'react-router-dom';
 import AppleImage from './food_images/apple.png';
 import AvocadoImage from './food_images/avocado.png';
@@ -55,6 +57,16 @@ export default function Home() {
   const { username, password } = location.state;
   const [userData, setUserData] = useState({});
   const [purchaseHistory, setPurchaseHistory] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/user/${username}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        console.log(data);
+      });
+  })
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -129,3 +141,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+

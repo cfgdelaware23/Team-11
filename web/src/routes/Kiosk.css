@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    height: 500px;
+    margin-top: 50px;
+    justify-content: space-between;
+    margin-left: -70px;
+}
+#bubly {
+    transform: scale(0.8);
+}

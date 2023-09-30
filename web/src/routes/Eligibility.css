@@ -88,18 +88,17 @@
     color: white;
     background-color: #106d8e;
   }
-  .yesContainer:follow {
-    color: white;
-    background-color: #106d8e;
-  }
+  .yesContainer.clicked {
+    background-color: #030894; 
+}
+  
 .noContainer:active {
     color: white;
     background-color:  #d60000;
   }
-  .noContainer:follow {
-    color: white;
-    background-color:  #d60000;
-  }
+.noContainer.clicked {
+    background-color: #820101; 
+}
 :target {
     color: red;
 }
