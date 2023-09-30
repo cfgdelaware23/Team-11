@@ -22,12 +22,11 @@ export default function Eligibility(){
             financialDetails.push("housing");
         }
         state.financialDetails = financialDetails;
+
         navigate('/home', {
             state: state,
         });
         
-        
-
         
     }
     return (

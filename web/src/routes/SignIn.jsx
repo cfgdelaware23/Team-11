@@ -3,12 +3,26 @@ import { useNavigate } from 'react-router-dom';
 export default function signIn() {
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    navigate('/eligibility', {
-      password: document.getElementById("password").value,
-      username: document.getElementById("username").value,
-      financialDetails: [],
-    });
+  const handleSignIn = async () => {
+    
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+
+    const data = await fetch(`http://localhost:3000/user/${username}`, {})
+    .then(res=>{
+      res.json()
+    })
+    .then(data=>{
+        navigate('/home', {
+      state: data,
+      });
+    
+    })
+    .catch(
+      err => {
+        console.log(err);
+      }
+    );
   };
 
   return (
