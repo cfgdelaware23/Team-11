@@ -33,7 +33,4 @@ router.delete("/user/:username", async (req, res) => {
     return deleteCustomer(req.params.username, res);
 })
 
-export const updateCustomer = async () => {
-}
-
 export default router;
