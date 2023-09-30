@@ -1,5 +1,6 @@
-import ProductData from "../models/product-data.model.js";
 import express from "express";
+import PurchaseHistory from "../models/purchase-history.model.js";
+import ProductData from "../models/product-data.model.js";
 import UserData from "../models/user-data.model.js";
 const router = express.Router();
 
@@ -61,6 +62,22 @@ router.post("/product/update", async (req, res) => {
     return;
 })
 
+router.get("/allPurchaseHistories", async (req, res) => {
+    const histories = await PurchaseHistory.find();
+    res.status(200).json(histories);
+    return;
+})
+
+router.get("/userPurchaseHistory/:username", async (req, res) => {
+    const username = req.params.username;
+    const user = await PurchaseHistory.findOne({username: username});
+    if(!user) {
+        res.status(400).json("User not found");
+        return;
+    }
+    res.status(200).json(user);
+    return;
+})
 
 router.get("/allCustomers", async (req, res) => {
     const users = await UserData.find();

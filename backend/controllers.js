@@ -2,6 +2,9 @@ import UserData from "./models/user-data.model.js";
 import PurchaseHistory from "./models/purchase-history.model.js";
 
 export const createCustomer = async (user, res) => {
+    if (!user || !user.name || !user.discount || !user.username || !user.publicHousing) {
+        return res.status(400).json('request body should contain a user object with name, discount, username, and publicHousing')
+    }
     const name = user.name;
     //const discount = user.discount;
     const username = user.username;
