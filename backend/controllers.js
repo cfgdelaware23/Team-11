@@ -114,4 +114,5 @@ export const updateFeedback = async (username, feedback) => {
     }
 
     const newFeedback = new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
+    newFeedback.save();
 }
