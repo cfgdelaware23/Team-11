@@ -105,6 +105,8 @@ export const updateFeedback = async (username, feedback) => {
         return;
     }
 
-    const newFeedback = new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
+    const newFeedback = await new FeedbackCategory({username, nutrition, affordability, satisfaction, ease});
     newFeedback.save();
+    res.status(200).json(console.log("successfully added feedback"));
+    return;
 }
