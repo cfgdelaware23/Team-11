@@ -1,6 +1,6 @@
 .questionsContainer{
     width: 450px;
-    background-color: #6e96a5; /* Green */
+    background-color: #6e96a5;
     border: none;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -103,6 +103,11 @@
     border-radius: 10px; 
     width: 120px;
     margin-top: 20px;
-    margin-left: 680px;
-    display: block;
+    margin-left: 70px;
+    transform: translateX(65%);
+
+}
+.selected {
+  background-color: #820101; 
+  color: white; 
 }
