@@ -10,7 +10,7 @@ export const createCustomer = async (user, res) => {
     const lastUpdate = new Date();
     const lastUpdatedByUser = false;
 
-    calculateDiscount(username, user.qualifiers);
+    const discount = calculateDiscount(user.qualifiers);
 
     if (!name || !discount || !username) {
         return res.status(400).json('User creation request lacks field')
@@ -81,8 +81,9 @@ export const updateCustomer = async (username, newUserData, res) => {
 }
 
 //Can change this function depending on how the discount will be calculated given the qualifiers of the customer
-export const calculateDiscount = async (username, qualifiers) => {
+export const calculateDiscount = async (qualifiers) => {
     if(qualifiers.publicHousing || qualifiers.ebt || qualifiers.snap) {
-        
+        return 0.5;
     }
+    return 0;
 }
