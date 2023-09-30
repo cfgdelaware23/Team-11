@@ -68,23 +68,30 @@ export default function Eligibility() {
       }
 
  return (
-    <div className="Eligibility">
-      <img className="logo" src={logoImage} alt='import'></img><br />
-      <h1 className="snapContainer">Are you part of Snap?</h1>
-      <div className="yes1Container"></div>
-      <button className={buttonClass(getsnap)} onClick={() => setsnap(true)}>YES</button>
-      {/* Add the NO button class and onClick handler */}
-      <button className={nobuttonClass(!getsnap, snapNoClicked)} onClick={() => { setsnap(false); setSnapNoClicked(true); }}>NO</button>
-      <h1 className="ebtContainer">Are you part of EBT?</h1>
-      <button className={buttonClass(getebt)} onClick={() => setebt(true)}>YES</button>
-      {/* Add the NO button class and onClick handler */}
-      <button className={nobuttonClass(!getebt, ebtNoClicked)} onClick={() => { setebt(false); setEbtNoClicked(true); }}>NO</button>
-      <h1 className="housingContainer">Do you have public housing?</h1>
-      <button className={buttonClass(gethousing)} onClick={() => sethousing(true)}>YES</button>
-      {/* Add the NO button class and onClick handler */}
-      <button className={nobuttonClass(!gethousing, housingNoClicked)} onClick={() => { sethousing(false); setHousingNoClicked(true); }}>NO</button>
-      <button className="submitContainer" onClick={() => addCustomerToDB(state.financialDetails)}>Submit</button>
-    </div>
+        <div className="Eligibility w-full flex flex-col items-center">
+            <img className="logo" src={logoImage} alt='import'></img>
+            <h1 className="mt-4 text-lg">Are you part of Snap?</h1>
+            <div className="flex m-2">
+                <button className={`mr-2 p-2 px-5 ${getsnap?"bg-blue-600":"bg-blue-400"} h-10 text-lg text-white rounded`} onClick={() => setsnap(true)}>YES</button>
+                {/* Add the NO button class and onClick handler */}
+                <button className={`mr-2 p-2 px-5 ${!getsnap?"bg-red-600":"bg-red-400"} h-10 text-lg text-white rounded`} onClick={() => { setsnap(false); setSnapNoClicked(true); }}>NO</button>
+            </div>
+            <h1 className="text-lg">Are you part of EBT?</h1>
+            <div className="flex">
+                <button className={`mr-2 p-2 px-5 ${getebt?"bg-blue-600":"bg-blue-400"} h-10 text-lg text-white rounded`} onClick={() => setebt(true)}>YES</button>
+                {/* Add the NO button class and onClick handler */}
+                <button className={`mr-2 p-2 px-5 ${!getebt?"bg-red-600":"bg-red-400"} h-10 text-lg text-white rounded`} onClick={() => { setebt(false); setEbtNoClicked(true); }}>NO</button>
+            </div>
+            <h1 className="text-lg">Do you have public housing?</h1>
+            <div>
+                
+            <button className={`mr-2 p-2 px-5 ${gethousing?"bg-blue-600":"bg-blue-400"} h-10 text-lg text-white rounded`} onClick={() => sethousing(true)}>YES</button>
+            <button className={`mr-2 p-2 px-5 ${!gethousing?"bg-red-600":"bg-red-400"} h-10 text-lg text-white rounded`} onClick={() => { sethousing(false); setHousingNoClicked(true); }}>NO</button>
+            </div>
+            {/* Add the NO button class and onClick handler */}
+            
+            <button className="mt-3 text-lg bg-red-400 h-10 p-3 flex items-center  text-white rounded" onClick={() => addCustomerToDB(state.financialDetails)}>Submit</button>
+        </div>
   )
 }
 
