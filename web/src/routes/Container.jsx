@@ -2,6 +2,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Shop from './Shop';
 import Home from './Home';
+import Feedback from './FeedBack';
 
 export default function Container() {
     return (
@@ -20,6 +21,12 @@ export default function Container() {
                   
                 <Shop />
             </Tab>
+
+            <Tab eventKey="FeedBack" title="FeedBack">
+                  
+                <Feedback />
+            </Tab>
+
         </Tabs>
        
         </div>

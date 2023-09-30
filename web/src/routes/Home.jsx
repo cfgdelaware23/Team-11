@@ -22,10 +22,11 @@ export default function Home() {
             
             <img className="logo3" src={importImg} alt='import' /><br />
             <p>
-                Username: {username}
-            </p> <br />
-            <p>
-            {JSON.stringify(userData)}
+            Username: {userData.username} <br />
+            Name: {userData.name} <br />
+            ID: {userData._id} <br />
+            Discount: {userData.discount} <br />
+            Stars: {userData.currentStars} <br/>
             </p> <br />
             <p>
             </p> <br />

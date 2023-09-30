@@ -16,7 +16,6 @@ export default function Landing() {
       <img className="logo" src={importImg} alt='import'></img><br/>
       <button className="buttonContainer" onClick={() => redirect("sign-in")}>LOGIN</button>
       <button className="buttonContainer" onClick={() => redirect("Register")}>REGISTER</button>
-      <button className="buttonContainer" onClick={() => redirect("Products")}>PRODUCT OF THE DAY</button>
       </div>
 
     </div>
