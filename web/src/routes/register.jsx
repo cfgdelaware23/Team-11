@@ -3,12 +3,15 @@ export default function register() {
     const navigate = useNavigate();
 
     const handleRegister = () => {
+        var customer = {
+            first_name: document.getElementById("first").value,
+            last_name: document.getElementById("last").value,
+            password: document.getElementById("password").value,
+            username: document.getElementById("username").value,
+            financialDetails: [],
+        }
       navigate('/eligibility', {
-        first_name: document.getElementById("first").value,
-        last_name: document.getElementById("last").value,
-        password: document.getElementById("password").value,
-        username: document.getElementById("username").value,
-        financialDetails: [],
+        state: customer,
       });
     };
 
