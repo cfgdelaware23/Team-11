@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { useLocation } from 'react-router-dom';
 import "./landing.css"
 import importImg from './logo.png';
 import FormControl from 'react-bootstrap/FormControl';
@@ -17,6 +18,35 @@ import orange from "./orange.jpg"
 import pretzels from "./pretzels.png"
 
 export default function Shop() {
+    const location = useLocation();
+    const { username, password } = location.state;
+    const [userData, setUserData] = useState({});
+    useEffect(() => {
+        const fetchUserData = async () => {
+          try {
+            const res = await fetch(`http://localhost:3000/user/${username}`);
+            const data = await res.json();
+            setUserData(data);
+            console.log(data);
+          } catch (error) {
+            console.error("Error fetching user data: ", error);
+          }
+        };
+        fetchUserData();
+    
+        const fetchPurchaseHistory = async () => {
+          try {
+            const res = await fetch(`http://localhost:3000/admin/userPurchaseHistory/${username}`);
+            const data = await res.json();
+            setPurchaseHistory(data.history);
+            console.log(data.history);
+          } catch (error) {
+            console.error("Error fetching purchase history: ", error);
+          }
+        };
+        fetchPurchaseHistory();
+      }, [username]);
+
 
     const groceryProducts = [
         {
@@ -156,7 +186,7 @@ export default function Shop() {
                     onChange={handleSearchChange}
                 />
             </InputGroup>
-            <Container className='justify-center'>
+            <div className='justify-center'>
                 <Row>
                     {filteredProducts.map((product, index) => (
                         <Col xs={12} sm={7} md={4} lg={3} key={index}>
@@ -168,14 +198,14 @@ export default function Shop() {
                                         {product.description}
                                     </Card.Text>
                                     <Card.Text>
-                                        ${product.price}
+                                    ${product.discount = 0.5 ?  (product.price * 0.5).toFixed(2) : product.price}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
-            </Container>
+            </div>
         </div>
     );
 }
