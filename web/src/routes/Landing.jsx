@@ -17,6 +17,7 @@ export default function Landing() {
       <div className="m-32">
         <button className="buttonContainer" onClick={() => redirect("sign-in")}>LOGIN</button>
         <button className="buttonContainer" onClick={() => redirect("Register")}>REGISTER</button>
+        <button className="buttonContainer" onClick={() => redirect("AdminLogin")}>ADMIN</button>
       </div>
       </div>
 
